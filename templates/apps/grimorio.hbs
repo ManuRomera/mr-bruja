@@ -1,0 +1,9 @@
+<div class="br-grim">
+  <div class="br-grim-actions">
+    <button type="button" data-action="copy"><i class="fa-regular fa-copy" aria-hidden="true"></i> {{localize "BR.Grimoire.Copy"}}</button>
+    <button type="button" data-action="download"><i class="fa-solid fa-download" aria-hidden="true"></i> {{localize "BR.Grimoire.Download"}}</button>
+    {{#if gm}}<button type="button" data-action="save"><i class="fa-solid fa-book-bookmark" aria-hidden="true"></i> {{localize "BR.Grimoire.Save"}}</button>{{/if}}
+    <button type="button" data-action="access" aria-label="{{localize 'BR.Access.Title'}}"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button>
+  </div>
+  {{#if empty}}<p class="br-lede br-grim-empty">{{localize "BR.Grimoire.Empty"}}</p>{{else}}<article class="br-grim-page">{{{html}}}</article>{{/if}}
+</div>

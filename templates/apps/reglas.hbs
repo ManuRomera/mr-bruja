@@ -1,0 +1,42 @@
+<div class="br-rules">
+  <nav class="br-rules-tabs" role="tablist" aria-label="{{localize 'BR.App.Rules'}}">
+    <button type="button" role="tab" class="{{#if (eq tab 'short')}}on{{/if}}" aria-selected="{{#if (eq tab 'short')}}true{{else}}false{{/if}}" data-action="tab" data-tab="short">{{localize "BR.Rules.TabShort"}}</button>
+    <button type="button" role="tab" class="{{#if (eq tab 'book')}}on{{/if}}" aria-selected="{{#if (eq tab 'book')}}true{{else}}false{{/if}}" data-action="tab" data-tab="book">{{localize "BR.Rules.TabBook"}}</button>
+    <button type="button" class="br-icon-btn" data-action="access" aria-label="{{localize 'BR.Access.Title'}}"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button>
+  </nav>
+
+  <div class="br-rules-body">
+  {{#if (eq tab "short")}}
+    <p class="br-lede">{{localize "BR.Rules.Disclaimer"}}</p>
+    <h2>{{localize "BR.Rules.Prep"}}</h2><p>{{localize "BR.Rules.PrepText"}}</p>
+    <h2>{{localize "BR.Rules.Scenes"}}</h2><p>{{localize "BR.Rules.ScenesText"}}</p>
+    <ul class="br-rules-list">{{#each types}}<li><strong>{{name}}</strong> — {{hint}}</li>{{/each}}</ul>
+    <h2>{{localize "BR.Rules.Roll"}}</h2><p>{{localize "BR.Rules.RollText"}}</p>
+    <table class="br-rules-table">
+      <thead><tr><th>{{localize "BR.Rules.Total"}}</th><th>{{localize "BR.Rules.Result"}}</th><th>PD</th><th>{{localize "BR.Rules.Cons"}}</th></tr></thead>
+      <tbody>{{#each roll}}<tr><td>{{label}}</td><td>{{nivel}}</td><td>{{pd}}</td><td>{{cons}}</td></tr>{{/each}}</tbody>
+    </table>
+    <h2>{{localize "BR.Rules.ConsTitle"}}</h2><p>{{localize "BR.Rules.ConsText"}}</p>
+    <h2>{{localize "BR.Rules.PdTitle"}}</h2><p>{{localize "BR.Rules.PdText"}}</p>
+    <table class="br-rules-table">
+      <thead><tr><th>PD</th><th>{{localize "BR.Rules.Effect"}}</th></tr></thead>
+      <tbody>{{#each costs}}<tr><td>{{cost}}</td><td>{{text}}</td></tr>{{/each}}</tbody>
+    </table>
+    <h2>{{localize "BR.Rules.End"}}</h2><p>{{localize "BR.Rules.EndText"}}</p>
+    <h2>{{localize "BR.Rules.Solo"}}</h2><p>{{localize "BR.Rules.SoloText"}}</p>
+  {{else}}
+    {{#if hasBook}}
+      {{#if bookTitle}}<h1>{{bookTitle}}</h1>{{/if}}
+      {{#each pages}}<section class="br-book-page"><h3>{{localize "BR.Rules.Page" n=n}}</h3><div class="br-book-text">{{text}}</div></section>{{/each}}
+    {{else}}
+      <div class="br-book-empty">
+        <p class="br-lede">{{localize "BR.Rules.BookEmpty"}}</p>
+        <p>{{localize "BR.Rules.BookHow"}}</p>
+        <pre class="br-code">brew install poppler tesseract tesseract-lang
+python3 scripts/import-manual.py "/ruta/a/tu/PDF_Bruja.pdf"</pre>
+        <button type="button" data-action="reload"><i class="fa-solid fa-rotate" aria-hidden="true"></i> {{localize "BR.Rules.Reload"}}</button>
+      </div>
+    {{/if}}
+  {{/if}}
+  </div>
+</div>

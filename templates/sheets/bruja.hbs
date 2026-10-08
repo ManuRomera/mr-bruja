@@ -1,0 +1,32 @@
+<div class="br-sheet-body">
+  <button type="button" class="br-access-btn" data-action="access" data-tooltip="{{localize 'BR.Access.Title'}}" aria-label="{{localize 'BR.Access.Title'}}"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button>
+  <header class="br-sheet-head">
+    <figure class="br-sheet-portrait"><img src="{{portrait}}" alt="{{actor.name}}" {{#if editable}}data-action="editImage" data-edit="img"{{/if}}></figure>
+    <div class="br-sheet-id">
+      <label><span>{{localize "BR.Prep.Name"}}</span><input type="text" name="name" value="{{actor.name}}"></label>
+      <label><span>{{localize "BR.Prep.Nick"}}</span><input type="text" name="system.apodo" value="{{system.apodo}}"></label>
+      <label><span>{{localize "BR.Prep.Trait"}}</span><input type="text" name="system.rasgo" value="{{system.rasgo}}"></label>
+    </div>
+  </header>
+
+  <section>
+    <h3>{{localize "BR.Prep.Bag"}}</h3>
+    {{#each system.bolsa}}
+    <div class="br-bag-field">
+      <label><span>{{lookup (lookup @root.bagLabels @index) "label"}}</span><input type="text" name="system.bolsa.{{@index}}.nombre" value="{{nombre}}"></label>
+      <label><span>{{localize "BR.Prep.Detail"}}</span><input type="text" name="system.bolsa.{{@index}}.detalle" value="{{detalle}}"></label>
+    </div>
+    {{/each}}
+  </section>
+
+  <section>
+    <h3>{{localize "BR.Sheet.Notes"}}</h3>
+    <textarea name="system.notas" rows="6">{{system.notas}}</textarea>
+  </section>
+
+  <footer class="br-row-end">
+    {{#if here}}<span class="br-badge"><i class="fa-solid fa-check" aria-hidden="true"></i> {{localize "BR.Sheet.AtTable"}}</span>{{/if}}
+    {{#if canSit}}<button type="button" class="br-primary" data-action="sit"><i class="fa-solid fa-chair" aria-hidden="true"></i> {{localize "BR.Sheet.Sit"}}</button>{{/if}}
+    <button type="button" data-action="choza"><i class="fa-solid fa-hat-wizard" aria-hidden="true"></i> {{localize "BR.App.Choza"}}</button>
+  </footer>
+</div>

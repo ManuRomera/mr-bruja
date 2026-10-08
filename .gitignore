@@ -1,0 +1,6 @@
+dist/
+.DS_Store
+node_modules/
+*.log
+art-inbox/
+assets/manual/libro.json

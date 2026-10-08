@@ -1,0 +1,136 @@
+{{!-- Lo que solo ve el Director --}}
+{{#if helpers.dj}}
+  {{#each helpers.unwritten}}
+  <section class="br-panel br-secret-panel">
+    <h3><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> {{localize "BR.Cons.WriteTitle"}}</h3>
+    <p class="br-hint">{{localize "BR.Cons.WriteHint"}}</p>
+    <textarea name="texto-{{id}}" rows="2" maxlength="400" placeholder="{{localize 'BR.Cons.Placeholder'}}" aria-label="{{localize 'BR.Cons.WriteTitle'}}"></textarea>
+    <p class="br-chips">{{#each @root.helpers.sparks}}<button type="button" class="br-chip" data-action="chip" data-field="texto-{{../id}}" data-text="{{this}}">{{this}}</button>{{/each}}</p>
+    <button type="button" class="br-primary" data-action="write" data-id="{{id}}"><i class="fa-solid fa-lock" aria-hidden="true"></i> {{localize "BR.Cons.Save"}}</button>
+  </section>
+  {{/each}}
+  {{#each helpers.pending}}
+  <section class="br-panel br-secret-panel">
+    <h3><i class="fa-solid fa-wand-sparkles" aria-hidden="true"></i> {{localize "BR.Pending.Title"}}</h3>
+    <p class="br-hint">{{origen}}</p>
+    {{#if options.length}}
+    <label><span>{{localize "BR.Pending.Which"}}</span><select name="pend-{{id}}">{{#each options}}<option value="{{id}}">{{label}}</option>{{/each}}</select></label>
+    {{/if}}
+    <button type="button" class="br-primary" data-action="resolve" data-id="{{id}}">{{localize "BR.Pending.Resolve"}}</button>
+  </section>
+  {{/each}}
+  {{#if helpers.breath}}
+  <section class="br-panel br-secret-panel">
+    <h3><i class="fa-solid fa-wind" aria-hidden="true"></i> {{localize "BR.Breath.Title"}}</h3>
+    <p class="br-hint">{{localize "BR.Breath.Hint"}}</p>
+    <label><span>{{localize "BR.Pending.Which"}}</span><select name="aliento">{{#each helpers.breath.options}}<option value="{{id}}">{{label}}</option>{{/each}}</select></label>
+    <div class="br-row-end"><button type="button" class="br-primary" data-action="breathe">{{localize "BR.Breath.Use"}}</button><button type="button" class="danger" data-action="giveUp">{{localize "BR.Breath.GiveUp"}}</button></div>
+  </section>
+  {{/if}}
+{{else}}
+  {{#if helpers.waiting}}<p class="br-warn"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> {{localize "BR.Pending.Waiting"}}</p>{{/if}}
+  {{#if state.aliento}}
+  <section class="br-panel"><h3>{{localize "BR.Breath.Title"}}</h3><p class="br-hint">{{localize "BR.Breath.Hint"}}</p>
+    <div class="br-row-end"><button type="button" class="br-primary" data-action="breathe">{{localize "BR.Breath.Use"}}</button><button type="button" class="danger" data-action="giveUp">{{localize "BR.Breath.GiveUp"}}</button></div>
+  </section>
+  {{/if}}
+{{/if}}
+
+{{!-- Las cinco cartas de escena --}}
+<section class="br-scenes" aria-label="{{localize 'BR.Scene.Choose'}}">
+  <div class="br-scenes-head">
+    <h2>{{#if play.hasScene}}{{localize "BR.Scene.Current"}}{{else}}{{localize "BR.Scene.Choose"}}{{/if}}</h2>
+    {{#if play.canRest}}
+    <button type="button" class="br-rest {{#if play.rest}}on{{/if}}" data-action="rest" aria-pressed="{{#if play.rest}}true{{else}}false{{/if}}"><i class="fa-solid fa-campground" aria-hidden="true"></i> {{localize "BR.Scene.Rest"}} ({{play.restCost}} PD)</button>
+    {{/if}}
+  </div>
+  <ul class="br-card-row {{#if play.hasScene}}compact{{/if}}">
+    {{#each play.cards}}
+    <li class="br-scene-card {{#if active}}active{{/if}} {{#if last}}last{{/if}}" style="--c:{{color}}">
+      <button type="button" class="br-card-btn" data-action="pick" data-tipo="{{tipo}}" {{#unless selectable}}disabled{{/unless}} aria-label="{{name}}: {{hint}}{{#if last}} ({{localize 'BR.Scene.LastPlayed'}}){{/if}}">
+        <span class="br-card-art"><img src="{{art}}" alt=""></span>
+        <span class="br-card-title" lang="{{@root.lang}}"><b>{{name}}</b></span>
+        <span class="br-pawn-spot" aria-hidden="true"><i class="br-pawn"></i></span>
+      </button>
+      <small>{{hint}}</small>
+      {{#if last}}<em class="br-last-tag">{{localize "BR.Scene.LastPlayed"}}</em>{{/if}}
+    </li>
+    {{/each}}
+  </ul>
+  {{#unless play.hasScene}}<p class="br-hint">{{localize "BR.Scene.Rule"}}{{#if play.lastName}} {{localize "BR.Scene.RuleLast"}}: <b>{{play.lastName}}</b>.{{/if}}</p>{{/unless}}
+</section>
+
+{{!-- La escena en curso --}}
+{{#if play.scene}}
+<section class="br-scene" style="--c:{{play.scene.color}}">
+  <header>
+    <h2><span class="br-dot" aria-hidden="true"></span> {{localize "BR.Scene.Label" n=play.scene.n tipo=play.scene.name}}</h2>
+    {{#if play.scene.descanso}}<span class="br-badge"><i class="fa-solid fa-campground" aria-hidden="true"></i> {{localize "BR.Scene.Rested"}}</span>{{/if}}
+  </header>
+
+  <div class="br-scene-grid">
+    <div class="br-scene-text">
+      <label><span>{{localize "BR.Scene.Frame"}}</span>
+        <textarea name="planteo" rows="3" maxlength="600" placeholder="{{localize 'BR.Scene.FramePlaceholder'}}">{{play.scene.planteo}}</textarea>
+      </label>
+      <p class="br-chips">{{#each play.questions}}<span class="br-q">{{this}}</span>{{/each}}</p>
+      <button type="button" data-action="planteo"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> {{localize "BR.Scene.SaveFrame"}}</button>
+    </div>
+
+    <div class="br-cauldron-box">
+      <div class="br-cauldron" aria-hidden="true">
+        <img src="{{play.caldero}}" alt="">
+        <i class="br-steam"></i>
+        {{#if play.scene.tirada}}
+        <ul class="br-dice">{{#each play.scene.tirada.dados}}<li class="br-die" style="--i:{{@index}}"><b>{{this}}</b></li>{{/each}}</ul>
+        {{/if}}
+      </div>
+
+      {{#if play.scene.tirada}}
+      <div class="br-result nivel-{{play.scene.tirada.nivel}}" role="status">
+        <p class="br-total">{{play.scene.tirada.total}}</p>
+        <h3>{{play.scene.tirada.nivelName}}</h3>
+        <p>{{play.scene.tirada.hint}}</p>
+        <ul class="br-gains">
+          {{#if play.scene.tirada.pd}}<li class="pd"><i class="fa-solid fa-droplet" aria-hidden="true"></i> +{{play.scene.tirada.pd}} PD</li>{{/if}}
+          {{#if play.scene.tirada.cons}}<li class="cons"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i> {{localize "BR.Scene.NewCons" n=play.scene.tirada.cons}}</li>{{/if}}
+        </ul>
+      </div>
+      {{else}}
+      <p class="br-dice-count"><i class="fa-solid fa-dice" aria-hidden="true"></i> {{localize "BR.Scene.Dice" n=play.scene.dice}}</p>
+      {{#if play.scene.canRoll}}<button type="button" class="br-primary big" data-action="roll"><i class="fa-solid fa-dice" aria-hidden="true"></i> {{localize "BR.Scene.Roll"}}</button>{{/if}}
+      {{/if}}
+    </div>
+  </div>
+
+  {{#unless play.scene.tirada}}
+  <div class="br-use">
+    <h3>{{localize "BR.Use.Title"}}</h3>
+    {{#if play.scene.uso}}
+      <p class="br-use-line {{#if play.scene.uso.granted}}granted{{/if}} {{#if play.scene.uso.denied}}denied{{/if}}">
+        <i class="fa-solid {{#if play.scene.uso.granted}}fa-circle-check{{else if play.scene.uso.denied}}fa-circle-xmark{{else}}fa-hourglass-half{{/if}}" aria-hidden="true"></i>
+        <span><strong>{{play.scene.uso.label}}</strong>{{#if play.scene.uso.frase}} — «{{play.scene.uso.frase}}»{{/if}}<small>{{#if play.scene.uso.granted}}{{localize "BR.Use.Granted"}}{{else if play.scene.uso.denied}}{{localize "BR.Use.Denied"}}{{else}}{{localize "BR.Use.Asked"}}{{/if}}</small></span>
+      </p>
+      <div class="br-row-end">
+        {{#if play.scene.canAnswer}}<button type="button" class="br-primary" data-action="useYes">{{localize "BR.Use.Yes"}}</button><button type="button" data-action="useNo">{{localize "BR.Use.No"}}</button>{{/if}}
+        {{#if @root.can.bruja}}<button type="button" class="br-link" data-action="useWithdraw">{{localize "BR.Use.Withdraw"}}</button>{{/if}}
+      </div>
+    {{else if play.scene.canAsk}}
+      <p class="br-hint">{{localize "BR.Use.Hint"}}</p>
+      <div class="br-use-form">
+        <select name="usoQue" aria-label="{{localize 'BR.Use.Title'}}">{{#each play.scene.useOptions}}<option value="{{que}}">{{label}}</option>{{/each}}</select>
+        <input type="text" name="usoFrase" maxlength="240" placeholder="{{localize 'BR.Use.Placeholder'}}" aria-label="{{localize 'BR.Use.Placeholder'}}">
+        <button type="button" data-action="useAsk">{{localize "BR.Use.Ask"}}</button>
+      </div>
+    {{else}}<p class="br-hint">{{localize "BR.Use.None"}}</p>{{/if}}
+  </div>
+  {{/unless}}
+
+  <div class="br-close">
+    <label><span>{{#if play.scene.tirada}}{{localize "BR.Scene.CloseNote"}}{{else}}{{localize "BR.Scene.CloseNoteNoRoll"}}{{/if}}</span>
+      <textarea name="nota" rows="3" maxlength="800" placeholder="{{localize 'BR.Scene.NotePlaceholder'}}">{{play.scene.nota}}</textarea>
+    </label>
+    <button type="button" class="br-primary" data-action="closeScene"><i class="fa-solid fa-feather" aria-hidden="true"></i> {{localize "BR.Scene.Close"}}</button>
+  </div>
+</section>
+{{/if}}

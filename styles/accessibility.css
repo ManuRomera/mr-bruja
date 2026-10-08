@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Accesibilidad. Las clases viven en <html> (settings.applyPreferences),
+   pero todas las reglas se limitan a ventanas y capas del sistema.
+   El modo oscuro está al final de system.css (comparte los tokens de las hojas).
+   ========================================================================== */
+
+/* Movimiento: el sistema operativo o el ajuste interno */
+@media (prefers-reduced-motion: reduce) {
+  .mr-br *, .mr-br *::before, .mr-br *::after { animation: none !important; transition-duration: .01ms !important; }
+}
+.br-reduced-motion .mr-br *, .br-reduced-motion .mr-br *::before, .br-reduced-motion .mr-br *::after { animation: none !important; transition-duration: .01ms !important; }
+
+/* Efectos: motas, humo, resplandor */
+.br-reduced-effects .mr-br .br-atmos, .br-reduced-effects .mr-br .br-steam { display: none; }
+.br-reduced-effects .mr-br .br-choza::after { box-shadow: none; }
+.br-reduced-effects .mr-br .br-flame { box-shadow: none; animation: none; }
+.br-reduced-effects .mr-br .br-liquid { box-shadow: none; }
+
+/* Tipografía sencilla */
+.br-plain-font .application.mr-br, .br-plain-font .mr-br.br-safety-signal { --br-serif: var(--br-sans); --br-display: var(--br-sans); --br-hand: var(--br-sans); }
+.br-plain-font .mr-br h1, .br-plain-font .mr-br h2, .br-plain-font .mr-br h3 { font-weight: 700; }
+.br-plain-font .mr-br em, .br-plain-font .mr-br .br-lede, .br-plain-font .mr-br .br-hand, .br-plain-font .mr-br .br-final-text { font-style: normal; }
+
+/* Espaciado */
+.br-wide-spacing .mr-br p, .br-wide-spacing .mr-br textarea, .br-wide-spacing .mr-br li { line-height: 1.8 !important; letter-spacing: .03em; word-spacing: .08em; }
+
+/* Botones grandes */
+.br-large-buttons .mr-br button:where(:not(.header-control)):not(.br-card-btn) { min-height: 44px; font-size: 1.02em; padding: .6em 1em; }
+.br-large-buttons .mr-br button.br-icon-btn { min-width: 40px; min-height: 40px; }
+
+/* Alto contraste: bordes y textos marcados, sin transparencias engañosas */
+.br-high-contrast .application.mr-br { color: #fff; border-color: #ffe2a8; }
+.br-high-contrast .mr-br button:where(:not(.header-control)) { border-width: 2px; border-color: #ffe2a8; }
+.br-high-contrast .mr-br input, .br-high-contrast .mr-br select, .br-high-contrast .mr-br textarea { border-width: 2px !important; border-color: #ffe2a8 !important; }
+.br-high-contrast .mr-br .br-panel, .br-high-contrast .mr-br .br-seat { background: #000; border-color: #ffe2a8; }
+.br-high-contrast .mr-br .br-head, .br-high-contrast .mr-br .br-foot { background: #000; }
+.br-high-contrast .mr-br .br-atmos { display: none; }
+.br-high-contrast .mr-br .br-choza::before { opacity: .25; }
+.br-high-contrast .mr-br.br-paper-window .window-content { background: #fffaf0; color: #000; }
+.br-high-contrast .mr-br :focus-visible { outline: 3px solid #ffd35a; outline-offset: 2px; }
+.br-high-contrast .mr-br .br-scene-card.last button.br-card-btn { filter: grayscale(1) brightness(.5); }
+
+/* Lectura limpia: fondos lisos, tinta elegida por el usuario */
+.br-reading .application.mr-br .window-content,
+.br-reading .application.mr-br.br-paper-window .window-content,
+.br-reading .application.mr-br.br-mustard .window-content,
+.br-reading .application.mr-br.br-sheet .window-content { background: #121110; color: var(--br-reading-ink); }
+.br-reading .mr-br .br-choza::before, .br-reading .mr-br .br-atmos { display: none; }
+.br-reading .mr-br .br-choza { background: #121110; }
+.br-reading .mr-br .br-ticket, .br-reading .mr-br .br-scene, .br-reading .mr-br .br-card-form, .br-reading .mr-br .br-setting-card, .br-reading .mr-br .br-end-body { color: var(--br-reading-ink); border: 1px solid rgba(255, 255, 255, .18); border-image: none; padding: 1rem; }
+.br-reading .mr-br .br-notebook, .br-reading .mr-br .br-grim, .br-reading .mr-br .br-sheet-body, .br-reading .mr-br .br-grim-page { color: var(--br-reading-ink); }
+.br-reading .mr-br input, .br-reading .mr-br textarea, .br-reading .mr-br select { color: var(--br-reading-ink) !important; background: rgba(255, 255, 255, .05) !important; }
+.br-reading .mr-br .br-scene label, .br-reading .mr-br .br-card-form label { color: var(--br-reading-ink); opacity: .8; }
+.br-reading .mr-br .br-scene button:where(:not(.header-control)), .br-reading .mr-br .br-card-form button:where(:not(.header-control)), .br-reading .mr-br .br-end-body button:where(:not(.header-control)) { color: var(--br-reading-ink); background: rgba(255, 255, 255, .06); }
+.br-reading .mr-br .br-hand, .br-reading .mr-br .br-hint, .br-reading .mr-br .br-lede { color: var(--br-reading-ink); font-style: normal; }
+.br-reading .mr-br .br-grim-head img { display: none; }

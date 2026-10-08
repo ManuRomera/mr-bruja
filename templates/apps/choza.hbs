@@ -1,0 +1,49 @@
+{{#if noGame}}
+<div class="br-choza br-empty">
+  <img class="br-empty-art" src="systems/mr-bruja/assets/art/brand/logo.webp" alt="">
+  <p class="br-lede">{{#if gm}}{{localize "BR.Game.Preparing"}}{{else}}{{localize "BR.Game.WaitGM"}}{{/if}}</p>
+</div>
+{{else}}
+<div class="br-choza phase-{{fase}}" data-tipo="{{tipoEscena}}" style="--br-escena:{{colorEscena}}; --br-bg:{{bg}}">
+  <div class="br-atmos" aria-hidden="true">{{#each motas}}<i style="--i:{{this}}"></i>{{/each}}</div>
+
+  <header class="br-head">
+    <div class="br-head-title">
+      <h1>{{setting.name}}</h1>
+      <p>{{faseLabel}}</p>
+    </div>
+    {{#if spectator}}<span class="br-badge"><i class="fa-solid fa-eye" aria-hidden="true"></i> {{localize "BR.Table.Spectator"}}</span>{{/if}}
+    <nav class="br-head-tools" aria-label="{{localize 'BR.Table.Tools'}}">
+      <button type="button" data-action="flip" data-tooltip="{{faceLabel}}" aria-label="{{faceLabel}}"><i class="fa-solid fa-clone" aria-hidden="true"></i></button>
+      {{#if can.dj}}<button type="button" data-action="notebook" data-tooltip="{{localize 'BR.App.Notebook'}}" aria-label="{{localize 'BR.App.Notebook'}}"><i class="fa-solid fa-book" aria-hidden="true"></i></button>{{/if}}
+      <button type="button" data-action="grimoire" data-tooltip="{{localize 'BR.App.Grimoire'}}" aria-label="{{localize 'BR.App.Grimoire'}}"><i class="fa-solid fa-book-open" aria-hidden="true"></i></button>
+      <button type="button" data-action="rules" data-tooltip="{{localize 'BR.App.Rules'}}" aria-label="{{localize 'BR.App.Rules'}}"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button>
+      <button type="button" data-action="safety" data-tooltip="{{localize 'BR.App.Safety'}}" aria-label="{{localize 'BR.App.Safety'}}"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i></button>
+      <button type="button" data-action="access" data-tooltip="{{localize 'BR.Access.Title'}}" aria-label="{{localize 'BR.Access.Title'}}"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button>
+    </nav>
+  </header>
+
+  <div class="br-board {{#unless isPrep}}with-sides{{/unless}}">
+    {{#unless isPrep}}{{> "systems/mr-bruja/templates/partials/lados.hbs"}}{{/unless}}
+
+    <main class="br-center" aria-live="polite">
+      {{#each warnings}}<p class="br-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> {{this}}</p>{{/each}}
+      {{#if needsKey}}
+      <p class="br-warn"><i class="fa-solid fa-key" aria-hidden="true"></i> {{localize "BR.Secret.NeedsKey"}} <button type="button" class="br-link" data-action="notebook">{{localize "BR.App.Notebook"}}</button></p>
+      {{/if}}
+      {{#if isPrep}}{{> "systems/mr-bruja/templates/partials/prep.hbs"}}{{/if}}
+      {{#if isPlay}}{{> "systems/mr-bruja/templates/partials/juego.hbs"}}{{/if}}
+      {{#if isEnd}}{{> "systems/mr-bruja/templates/partials/fin.hbs"}}{{/if}}
+    </main>
+
+    {{#unless isPrep}}<aside class="br-right" aria-label="{{localize 'BR.Side.Heirs'}}">{{> "systems/mr-bruja/templates/partials/lados.hbs" right=true}}</aside>{{/unless}}
+  </div>
+
+  <footer class="br-foot">
+    <ul class="br-recent" aria-label="{{localize 'BR.Table.History'}}">
+      {{#each recent}}<li style="--c:{{color}}" title="{{nota}}"><b>{{n}}</b> {{tipo}} · {{nivel}}</li>{{/each}}
+    </ul>
+    {{#if canNew}}<button type="button" class="br-link" data-action="newGame"><i class="fa-solid fa-rotate" aria-hidden="true"></i> {{localize "BR.Game.New"}}</button>{{/if}}
+  </footer>
+</div>
+{{/if}}

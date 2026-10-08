@@ -1,0 +1,80 @@
+{{#if noGame}}<div class="br-notebook"><p class="br-lede">{{localize "BR.Game.NoDoc"}}</p></div>
+{{else if locked}}
+<div class="br-notebook br-locked">
+  <img src="systems/mr-bruja/assets/art/objects/llave-candado.webp" alt="" class="br-lock-art">
+  <h2>{{localize "BR.Notebook.LockedTitle"}}</h2>
+  <p class="br-lede">{{#if noDj}}{{localize "BR.Notebook.NoDj"}}{{else if needsKey}}{{localize "BR.Secret.NeedsKey"}}{{else}}{{localize "BR.Notebook.NotYours"}}{{/if}}</p>
+  {{#if needsKey}}
+  <label class="br-key-form"><span>{{localize "BR.Secret.KeyLabel"}}</span><textarea name="clave" rows="2" placeholder="{{localize 'BR.Secret.KeyPlaceholder'}}"></textarea></label>
+  <button type="button" class="br-primary" data-action="importKey"><i class="fa-solid fa-key" aria-hidden="true"></i> {{localize "BR.Secret.Import"}}</button>
+  {{/if}}
+</div>
+{{else}}
+<div class="br-notebook">
+  <header class="br-note-head">
+    <div><h2>{{localize "BR.Notebook.Title"}}</h2><p class="br-hint">{{localize "BR.Notebook.Intro"}}</p></div>
+    <div class="br-row-end"><button type="button" data-action="copyKey" data-tooltip="{{localize 'BR.Secret.CopyKey'}}" aria-label="{{localize 'BR.Secret.CopyKey'}}"><i class="fa-solid fa-key" aria-hidden="true"></i></button><button type="button" data-action="choza"><i class="fa-solid fa-hat-wizard" aria-hidden="true"></i> {{localize "BR.App.Choza"}}</button><button type="button" data-action="access" aria-label="{{localize 'BR.Access.Title'}}"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button></div>
+  </header>
+
+  <section class="br-card-form">
+    <h3>{{localize "BR.Notebook.Witch"}}: {{bruja.nombre}}{{#if bruja.apodo}} «{{bruja.apodo}}»{{/if}}</h3>
+    <p><strong>{{localize "BR.Prep.Trait"}}:</strong> {{bruja.rasgo}}</p>
+    <ul class="br-inline">{{#each bruja.bolsa}}<li><strong>{{nombre}}</strong>{{#if detalle}} — {{detalle}}{{/if}}</li>{{/each}}</ul>
+  </section>
+
+  <section class="br-card-form">
+    <h3>{{localize "BR.Notebook.Consequences"}} <span class="br-count">{{activas}} / {{max}}</span></h3>
+    {{#unless cons.length}}<p class="br-hint">{{localize "BR.Notebook.NoCons"}}</p>{{/unless}}
+    <ol class="br-cons-list">
+      {{#each cons}}
+      <li class="{{#if activa}}active{{else}}done{{/if}}">
+        <header><b>{{n}}</b> <span>{{localize "BR.Notebook.FromScene" n=escena}}</span>
+          <span class="br-badge">{{#if activa}}{{localize "BR.Notebook.Active"}}{{else}}{{localize "BR.Notebook.Removed"}}{{/if}}{{#if revelada}} · {{localize "BR.Notebook.Revealed"}}{{/if}}</span></header>
+        <textarea name="texto-{{id}}" rows="2" maxlength="400" placeholder="{{localize 'BR.Cons.Placeholder'}}" aria-label="{{localize 'BR.Notebook.Consequences'}} {{n}}">{{texto}}</textarea>
+        <div class="br-row-end">
+          <button type="button" data-action="saveCons" data-id="{{id}}"><i class="fa-solid fa-lock" aria-hidden="true"></i> {{localize "BR.Cons.Save"}}</button>
+          {{#if activa}}<button type="button" data-action="dropCons" data-id="{{id}}">{{localize "BR.Notebook.Drop"}}</button>{{/if}}
+          {{#unless revelada}}<button type="button" data-action="revealCons" data-id="{{id}}"><i class="fa-solid fa-eye" aria-hidden="true"></i> {{localize "BR.Notebook.Reveal"}}</button>{{/unless}}
+        </div>
+      </li>
+      {{/each}}
+    </ol>
+    <details class="br-sparks" data-memory="sparks"><summary>{{localize "BR.Notebook.Sparks"}}</summary>
+      <p class="br-chips">{{#each sparks}}<button type="button" class="br-chip" data-action="spark" data-field="{{../sparkTarget}}" data-text="{{this}}">{{this}}</button>{{/each}}</p>
+    </details>
+  </section>
+
+  <section class="br-card-form">
+    <h3>{{localize "BR.Notebook.Candidates"}}</h3>
+    <p class="br-hint">{{localize "BR.Notebook.CandidatesHint"}}</p>
+    {{#each marcadas}}<p class="br-marked"><i class="fa-solid fa-seedling" aria-hidden="true"></i> {{nombre}}{{#if elegida}} ✦{{/if}}</p>{{/each}}
+    {{#each candidatas}}
+    <div class="br-row" data-row="candidatas" data-i="{{i}}">
+      <input type="checkbox" {{#if hecho}}checked{{/if}} aria-label="{{localize 'BR.Notebook.Done'}}">
+      <input type="text" name="cand.{{i}}.nombre" value="{{nombre}}" placeholder="{{localize 'BR.Notebook.Name'}}" aria-label="{{localize 'BR.Notebook.Name'}}">
+      <input type="text" name="cand.{{i}}.nota" value="{{nota}}" placeholder="{{localize 'BR.Notebook.Note'}}" aria-label="{{localize 'BR.Notebook.Note'}}">
+      <button type="button" class="br-icon-btn" data-action="delRow" data-kind="candidatas" data-i="{{i}}" aria-label="{{localize 'BR.Notebook.Remove'}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+    </div>
+    {{/each}}
+    <button type="button" data-action="addRow" data-kind="candidatas"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "BR.Notebook.Add"}}</button>
+  </section>
+
+  <section class="br-card-form">
+    <h3>{{localize "BR.Notebook.Npcs"}}</h3>
+    {{#each pnj}}
+    <div class="br-row" data-row="pnj" data-i="{{i}}">
+      <input type="checkbox" {{#if hecho}}checked{{/if}} aria-label="{{localize 'BR.Notebook.Done'}}">
+      <input type="text" name="pnj.{{i}}.nombre" value="{{nombre}}" placeholder="{{localize 'BR.Notebook.Name'}}" aria-label="{{localize 'BR.Notebook.Name'}}">
+      <input type="text" name="pnj.{{i}}.nota" value="{{nota}}" placeholder="{{localize 'BR.Notebook.Note'}}" aria-label="{{localize 'BR.Notebook.Note'}}">
+      <button type="button" class="br-icon-btn" data-action="delRow" data-kind="pnj" data-i="{{i}}" aria-label="{{localize 'BR.Notebook.Remove'}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+    </div>
+    {{/each}}
+    <button type="button" data-action="addRow" data-kind="pnj"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "BR.Notebook.Add"}}</button>
+  </section>
+
+  <section class="br-card-form">
+    <h3>{{localize "BR.Notebook.Questions"}}</h3>
+    <ul class="br-inline">{{#each questions}}<li>{{this}}</li>{{/each}}</ul>
+  </section>
+</div>
+{{/if}}

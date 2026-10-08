@@ -1,0 +1,33 @@
+{
+  "id": "mr-bruja",
+  "title": "MR- Bruja",
+  "description": "Sistema no oficial de Bruja (jim pinto, edición de El Refugio de Ryhope) para Foundry VTT: un juego de rol de narración compartida para dos personas sobre una vieja bruja que busca heredera antes de morir. La Choza con su caldero de dados, las cinco cartas de escena, las velas de las consecuencias secretas, el frasco de puntos de drama, la Libreta del Director y el Grimorio autogenerado. Grabados del siglo XIX, sonido sintetizado, accesibilidad con modo oscuro y seguridad en mesa. Requiere el manual del juego.",
+  "version": "0.1.0",
+  "compatibility": { "minimum": "13", "verified": "13.351", "maximum": "14" },
+  "authors": [
+    { "name": "Manu Romera", "url": "https://github.com/ManuRomera", "flags": { "role": "Diseño e implementación" } },
+    { "name": "Anthropic Claude", "flags": { "role": "Asistencia de desarrollo" } }
+  ],
+  "esmodules": ["mr-bruja.mjs", "module/mr-credits.mjs"],
+  "styles": ["styles/system.css", "styles/accessibility.css"],
+  "languages": [
+    { "lang": "es", "name": "Español", "path": "lang/es.json" },
+    { "lang": "en", "name": "English", "path": "lang/en.json" }
+  ],
+  "documentTypes": { "Actor": { "bruja": { "htmlFields": ["notas"] } } },
+  "socket": true,
+  "grid": { "distance": 1, "units": "" },
+  "background": "systems/mr-bruja/assets/art/brand/cover.webp",
+  "media": [
+    { "type": "setup", "url": "systems/mr-bruja/assets/art/brand/cover.webp", "thumbnail": "systems/mr-bruja/assets/art/brand/logo.webp" },
+    { "type": "icon", "url": "systems/mr-bruja/assets/icon.svg" }
+  ],
+  "flags": { "hotReload": { "extensions": ["css", "hbs", "json"], "paths": ["styles", "templates", "lang"] } },
+  "url": "https://github.com/ManuRomera/mr-bruja",
+  "bugs": "https://github.com/ManuRomera/mr-bruja/issues",
+  "manifest": "https://github.com/ManuRomera/mr-bruja/releases/latest/download/system.json",
+  "download": "https://github.com/ManuRomera/mr-bruja/releases/latest/download/mr-bruja.zip",
+  "readme": "https://github.com/ManuRomera/mr-bruja#readme",
+  "changelog": "https://github.com/ManuRomera/mr-bruja/blob/main/CHANGELOG.md",
+  "license": "LICENSE"
+}

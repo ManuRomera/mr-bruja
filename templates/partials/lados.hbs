@@ -1,0 +1,84 @@
+{{#if right}}
+{{!-- Columna derecha: herederas, frasco de PD y recetas --}}
+<section class="br-panel br-heirs">
+  <h3><i class="fa-solid fa-seedling" aria-hidden="true"></i> {{localize "BR.Side.Heirs"}}</h3>
+  <ul>
+    {{#each side.herederas}}
+    <li class="{{#if elegida}}chosen{{/if}}">
+      <span class="br-heir-portrait"><img src="{{portrait}}" alt=""><img class="br-seal" src="systems/mr-bruja/assets/art/extras/sello-cera.webp" alt=""></span>
+      <span><strong>{{nombre}}</strong>{{#if nota}}<small>{{nota}}</small>{{/if}}</span>
+    </li>
+    {{/each}}
+    {{#each side.emptySlots}}<li class="empty"><span class="br-heir-portrait"></span><span><small>{{localize "BR.Side.EmptyHeir"}}</small></span></li>{{/each}}
+  </ul>
+</section>
+
+<section class="br-panel br-flask-panel">
+  <h3><i class="fa-solid fa-flask" aria-hidden="true"></i> {{localize "BR.Side.Flask"}}</h3>
+  <div class="br-flask-row">
+    <div class="br-flask" role="img" aria-label="{{localize 'BR.Side.PdAvailable'}}: {{side.pd}}" style="--fill:{{side.fill}}%">
+      <img src="systems/mr-bruja/assets/art/objects/frasco.webp" alt="">
+      <i class="br-liquid" aria-hidden="true"></i>
+      <b>{{side.pd}}</b>
+    </div>
+    <ul class="br-pd-stats">
+      <li><span>{{localize "BR.Side.PdAvailable"}}</span><b>{{side.pd}}</b></li>
+      <li><span>{{localize "BR.Side.PdEarned"}}</span><b>{{side.ganados}}</b></li>
+      <li><span>{{localize "BR.Side.PdGoal"}}</span><b>{{side.goal}}%</b></li>
+    </ul>
+  </div>
+  <div class="br-goal" aria-hidden="true"><i style="width:{{side.goal}}%"></i></div>
+</section>
+
+<section class="br-panel br-recipes">
+  <h3><i class="fa-solid fa-scroll" aria-hidden="true"></i> {{localize "BR.Side.Recipes"}}</h3>
+  <ul>
+    {{#each side.recipes}}
+    <li class="{{#if enabled}}can{{/if}} {{#if on}}on{{/if}}">
+      <span class="br-cost" aria-label="{{cost}} PD">{{cost}}</span>
+      <span class="br-recipe-text"><strong><i class="fa-solid {{icon}}" aria-hidden="true"></i> {{label}}</strong><small>{{hint}}</small></span>
+      {{#if input}}
+      <span class="br-recipe-form">
+        <input type="text" name="herederaNombre" placeholder="{{localize 'BR.Recipe.HeirName'}}" aria-label="{{localize 'BR.Recipe.HeirName'}}" {{#unless enabled}}disabled{{/unless}}>
+        <input type="text" name="herederaNota" placeholder="{{localize 'BR.Recipe.HeirNote'}}" aria-label="{{localize 'BR.Recipe.HeirNote'}}" {{#unless enabled}}disabled{{/unless}}>
+      </span>
+      {{/if}}
+      {{#if select}}
+      <span class="br-recipe-form"><select name="herederaElegida" aria-label="{{localize 'BR.Recipe.elegir'}}" {{#unless enabled}}disabled{{/unless}}>{{#each @root.side.herederas}}<option value="{{id}}">{{nombre}}</option>{{/each}}</select></span>
+      {{/if}}
+      <button type="button" data-action="{{action}}" {{#unless enabled}}disabled{{/unless}}>{{#if on}}{{localize "BR.Recipe.Undo"}}{{else}}{{localize "BR.Recipe.Use"}}{{/if}}</button>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+{{else}}
+{{!-- Columna izquierda: la bruja, su bolsa y las velas --}}
+<aside class="br-left" aria-label="{{localize 'BR.Side.Witch'}}">
+  <section class="br-panel br-witch">
+    <div class="br-witch-head">
+      <img class="br-witch-portrait" src="{{bruja.portrait}}" alt="">
+      <div><h2>{{bruja.nombre}}</h2>{{#if bruja.apodo}}<p class="br-nick">«{{bruja.apodo}}»</p>{{/if}}</div>
+    </div>
+    <p class="br-trait"><i class="fa-solid fa-star-of-life" aria-hidden="true"></i> <span>{{bruja.rasgo}}</span></p>
+  </section>
+
+  <section class="br-panel br-bag">
+    <h3><img src="systems/mr-bruja/assets/art/objects/bolsa.webp" alt="" class="br-bag-icon"> {{localize "BR.Side.Bag"}}</h3>
+    <ul>
+      {{#each bruja.bolsa}}
+      <li><i class="fa-solid {{icon}}" aria-hidden="true"></i><span><small>{{label}}</small><strong>{{nombre}}</strong>{{#if detalle}}<em>{{detalle}}</em>{{/if}}</span></li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="br-panel br-candles">
+    <h3><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i> {{localize "BR.Side.Candles"}}</h3>
+    <ol class="br-candle-row" role="img" aria-label="{{localize 'BR.Side.CandlesLabel'}}: {{bruja.lit}} / 5">
+      {{#each bruja.velas}}
+      <li class="{{#if on}}lit{{else}}out{{/if}}"><img src="systems/mr-bruja/assets/art/objects/vela.webp" alt=""><i class="br-flame" aria-hidden="true"></i>{{#unless on}}<i class="br-x fa-solid fa-xmark" aria-hidden="true"></i>{{/unless}}</li>
+      {{/each}}
+    </ol>
+    <p class="br-hint">{{localize "BR.Side.CandlesHint"}}</p>
+  </section>
+</aside>
+{{/if}}
