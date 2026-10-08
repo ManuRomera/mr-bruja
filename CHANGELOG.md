@@ -1,5 +1,9 @@
 # Cambios
 
+## 0.1.1 · 2026-10-09
+
+- Repositorio público: avisos de uso y permisos actualizados; instalación por manifiesto.
+
 ## 0.1.0 · 2026-10-09
 
 Primera versión jugable (sin publicar: pendiente de permiso de la editorial).

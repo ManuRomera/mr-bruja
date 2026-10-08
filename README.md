@@ -1,6 +1,6 @@
 # MR- Bruja
 
-Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición de El Refugio de Ryhope): un juego de narración compartida **para dos personas** sobre una vieja bruja que debe encontrar heredera antes de morir. **Necesitas el libro**; aquí no hay texto suyo (ver `NOTICE.md`). Repositorio **privado**, de uso personal.
+Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición de El Refugio de Ryhope): un juego de narración compartida **para dos personas** sobre una vieja bruja que debe encontrar heredera antes de morir. **Necesitas el libro**; aquí no hay texto suyo (ver `NOTICE.md`).
 
 ## Qué hace
 
@@ -15,7 +15,7 @@ Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición d
 
 ## Instalación
 
-Al ser privado, se usa copiando la carpeta a `Data/systems/mr-bruja` (o descargando el zip de la release con tu sesión de GitHub). El manifiesto no es instalable desde Foundry sin credenciales:
+En Foundry: **Sistemas → Instalar sistema** y pega el manifiesto:
 
 ```
 https://github.com/ManuRomera/mr-bruja/releases/latest/download/system.json

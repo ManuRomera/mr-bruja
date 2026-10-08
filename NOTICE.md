@@ -6,11 +6,11 @@
 
 Este sistema es una **herramienta de mesa**: no sustituye al manual. **No reproduce el texto del libro**: las reglas están descritas con otras palabras y la ambientación incluida («Cuento de hadas») es original. Si te gusta el juego, cómpralo: es corto, directo y muy bueno.
 
-## Repositorio privado, uso personal
+## Uso y permisos
 
-Este repositorio es **privado**: es una herramienta de mesa para uso personal de quien tiene el libro. No se distribuye públicamente mientras no haya permiso de El Refugio de Ryhope y de jim pinto.
+Es una herramienta de mesa gratuita y **no oficial** para quien tiene el libro. Aún no hay permiso expreso de El Refugio de Ryhope ni de jim pinto: si alguno de ellos pide que se retire, se retirará.
 
-**El texto del libro no viaja con el sistema.** Si quieres consultarlo dentro de Foundry (Reglas → El libro), lo generas tú desde TU PDF con `scripts/import-manual.py` (OCR local). El resultado, `assets/manual/libro.json`, está en `.gitignore` y se queda en tu ordenador. Si algún día el repositorio se hiciera público, ese archivo no debe subirse.
+**El texto del libro no viaja con el sistema.** Si quieres consultarlo dentro de Foundry (Reglas → El libro), lo generas tú desde TU PDF con `scripts/import-manual.py` (OCR local). El resultado, `assets/manual/libro.json`, está en `.gitignore` y se queda en tu ordenador: no lo subas a ningún sitio.
 
 ## Qué incluye este repositorio
 
