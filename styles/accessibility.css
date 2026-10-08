@@ -15,9 +15,10 @@
 .br-reduced-effects .mr-br .br-choza::after { box-shadow: none; }
 .br-reduced-effects .mr-br .br-flame { box-shadow: none; animation: none; }
 .br-reduced-effects .mr-br .br-liquid { box-shadow: none; }
+.br-reduced-effects .mr-br .br-page, .br-reduced-effects .mr-br .br-book { filter: none; }
 
 /* Tipografía sencilla */
-.br-plain-font .application.mr-br, .br-plain-font .mr-br.br-safety-signal { --br-serif: var(--br-sans); --br-display: var(--br-sans); --br-hand: var(--br-sans); }
+.br-plain-font .application.mr-br, .br-plain-font .mr-br.br-safety-signal { --br-serif: var(--br-sans); --br-display: var(--br-sans); --br-sc: var(--br-sans); --br-hand: var(--br-sans); }
 .br-plain-font .mr-br h1, .br-plain-font .mr-br h2, .br-plain-font .mr-br h3 { font-weight: 700; }
 .br-plain-font .mr-br em, .br-plain-font .mr-br .br-lede, .br-plain-font .mr-br .br-hand, .br-plain-font .mr-br .br-final-text { font-style: normal; }
 
@@ -32,7 +33,9 @@
 .br-high-contrast .application.mr-br { color: #fff; border-color: #ffe2a8; }
 .br-high-contrast .mr-br button:where(:not(.header-control)) { border-width: 2px; border-color: #ffe2a8; }
 .br-high-contrast .mr-br input, .br-high-contrast .mr-br select, .br-high-contrast .mr-br textarea { border-width: 2px !important; border-color: #ffe2a8 !important; }
-.br-high-contrast .mr-br .br-panel, .br-high-contrast .mr-br .br-seat { background: #000; border-color: #ffe2a8; }
+.br-high-contrast .mr-br .br-panel { background: #000; border-color: #ffe2a8; }
+.br-high-contrast .mr-br .br-page, .br-high-contrast .mr-br .br-book { filter: none; }
+.br-high-contrast .mr-br .br-page::before, .br-high-contrast .mr-br .br-book::before { opacity: 0; }
 .br-high-contrast .mr-br .br-head, .br-high-contrast .mr-br .br-foot { background: #000; }
 .br-high-contrast .mr-br .br-atmos { display: none; }
 .br-high-contrast .mr-br .br-choza::before { opacity: .25; }
@@ -47,7 +50,8 @@
 .br-reading .application.mr-br.br-sheet .window-content { background: #121110; color: var(--br-reading-ink); }
 .br-reading .mr-br .br-choza::before, .br-reading .mr-br .br-atmos { display: none; }
 .br-reading .mr-br .br-choza { background: #121110; }
-.br-reading .mr-br .br-ticket, .br-reading .mr-br .br-scene, .br-reading .mr-br .br-card-form, .br-reading .mr-br .br-setting-card, .br-reading .mr-br .br-end-body { color: var(--br-reading-ink); border: 1px solid rgba(255, 255, 255, .18); border-image: none; padding: 1rem; }
+.br-reading .mr-br .br-page, .br-reading .mr-br .br-book, .br-reading .mr-br .br-ticket, .br-reading .mr-br .br-scene, .br-reading .mr-br .br-card-form, .br-reading .mr-br .br-setting-card, .br-reading .mr-br .br-end-body { color: var(--br-reading-ink); border: 1px solid rgba(255, 255, 255, .18); border-image: none; padding: 1rem; }
+.br-reading .mr-br .br-page::before, .br-reading .mr-br .br-book::before, .br-reading .mr-br .br-book::after { display: none; }
 .br-reading .mr-br .br-notebook, .br-reading .mr-br .br-grim, .br-reading .mr-br .br-sheet-body, .br-reading .mr-br .br-grim-page { color: var(--br-reading-ink); }
 .br-reading .mr-br input, .br-reading .mr-br textarea, .br-reading .mr-br select { color: var(--br-reading-ink) !important; background: rgba(255, 255, 255, .05) !important; }
 .br-reading .mr-br .br-scene label, .br-reading .mr-br .br-card-form label { color: var(--br-reading-ink); opacity: .8; }

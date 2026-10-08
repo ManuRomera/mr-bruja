@@ -60,23 +60,46 @@
   {{#unless play.hasScene}}<p class="br-hint">{{localize "BR.Scene.Rule"}}{{#if play.lastName}} {{localize "BR.Scene.RuleLast"}}: <b>{{play.lastName}}</b>.{{/if}}</p>{{/unless}}
 </section>
 
-{{!-- La escena en curso --}}
+{{!-- La escena en curso: un libro abierto --}}
 {{#if play.scene}}
-<section class="br-scene" style="--c:{{play.scene.color}}">
-  <header>
-    <h2><span class="br-dot" aria-hidden="true"></span> {{localize "BR.Scene.Label" n=play.scene.n tipo=play.scene.name}}</h2>
-    {{#if play.scene.descanso}}<span class="br-badge"><i class="fa-solid fa-campground" aria-hidden="true"></i> {{localize "BR.Scene.Rested"}}</span>{{/if}}
-  </header>
+<section class="br-book br-scene-book" style="--c:{{play.scene.color}}">
+  <div class="br-leaf">
+    <header class="br-leaf-head">
+      <h2><span class="br-dot" aria-hidden="true"></span> {{localize "BR.Scene.Label" n=play.scene.n tipo=play.scene.name}}</h2>
+      {{#if play.scene.descanso}}<span class="br-badge"><i class="fa-solid fa-campground" aria-hidden="true"></i> {{localize "BR.Scene.Rested"}}</span>{{/if}}
+    </header>
 
-  <div class="br-scene-grid">
-    <div class="br-scene-text">
-      <label><span>{{localize "BR.Scene.Frame"}}</span>
-        <textarea name="planteo" rows="3" maxlength="600" placeholder="{{localize 'BR.Scene.FramePlaceholder'}}">{{play.scene.planteo}}</textarea>
-      </label>
-      <p class="br-chips">{{#each play.questions}}<span class="br-q">{{this}}</span>{{/each}}</p>
-      <button type="button" data-action="planteo"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> {{localize "BR.Scene.SaveFrame"}}</button>
+    <label><span>{{localize "BR.Scene.Frame"}}</span>
+      <textarea name="planteo" rows="3" maxlength="600" placeholder="{{localize 'BR.Scene.FramePlaceholder'}}">{{play.scene.planteo}}</textarea>
+    </label>
+    <p class="br-chips">{{#each play.questions}}<span class="br-q">{{this}}</span>{{/each}}</p>
+    <button type="button" data-action="planteo"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> {{localize "BR.Scene.SaveFrame"}}</button>
+
+    {{#unless play.scene.tirada}}
+    <div class="br-use">
+      <h3>{{localize "BR.Use.Title"}}</h3>
+      {{#if play.scene.uso}}
+        <p class="br-use-line {{#if play.scene.uso.granted}}granted{{/if}} {{#if play.scene.uso.denied}}denied{{/if}}">
+          <i class="fa-solid {{#if play.scene.uso.granted}}fa-circle-check{{else if play.scene.uso.denied}}fa-circle-xmark{{else}}fa-hourglass-half{{/if}}" aria-hidden="true"></i>
+          <span><strong>{{play.scene.uso.label}}</strong>{{#if play.scene.uso.frase}} — «{{play.scene.uso.frase}}»{{/if}}<small>{{#if play.scene.uso.granted}}{{localize "BR.Use.Granted"}}{{else if play.scene.uso.denied}}{{localize "BR.Use.Denied"}}{{else}}{{localize "BR.Use.Asked"}}{{/if}}</small></span>
+        </p>
+        <div class="br-row-end">
+          {{#if play.scene.canAnswer}}<button type="button" class="br-primary" data-action="useYes">{{localize "BR.Use.Yes"}}</button><button type="button" data-action="useNo">{{localize "BR.Use.No"}}</button>{{/if}}
+          {{#if @root.can.bruja}}<button type="button" class="br-link" data-action="useWithdraw">{{localize "BR.Use.Withdraw"}}</button>{{/if}}
+        </div>
+      {{else if play.scene.canAsk}}
+        <p class="br-hint">{{localize "BR.Use.Hint"}}</p>
+        <div class="br-use-form">
+          <select name="usoQue" aria-label="{{localize 'BR.Use.Title'}}">{{#each play.scene.useOptions}}<option value="{{que}}">{{label}}</option>{{/each}}</select>
+          <input type="text" name="usoFrase" maxlength="240" placeholder="{{localize 'BR.Use.Placeholder'}}" aria-label="{{localize 'BR.Use.Placeholder'}}">
+          <button type="button" data-action="useAsk">{{localize "BR.Use.Ask"}}</button>
+        </div>
+      {{else}}<p class="br-hint">{{localize "BR.Use.None"}}</p>{{/if}}
     </div>
+    {{/unless}}
+  </div>
 
+  <div class="br-leaf br-leaf-right">
     <div class="br-cauldron-box">
       <div class="br-cauldron" aria-hidden="true">
         <img src="{{play.caldero}}" alt="">
@@ -101,36 +124,13 @@
       {{#if play.scene.canRoll}}<button type="button" class="br-primary big" data-action="roll"><i class="fa-solid fa-dice" aria-hidden="true"></i> {{localize "BR.Scene.Roll"}}</button>{{/if}}
       {{/if}}
     </div>
-  </div>
 
-  {{#unless play.scene.tirada}}
-  <div class="br-use">
-    <h3>{{localize "BR.Use.Title"}}</h3>
-    {{#if play.scene.uso}}
-      <p class="br-use-line {{#if play.scene.uso.granted}}granted{{/if}} {{#if play.scene.uso.denied}}denied{{/if}}">
-        <i class="fa-solid {{#if play.scene.uso.granted}}fa-circle-check{{else if play.scene.uso.denied}}fa-circle-xmark{{else}}fa-hourglass-half{{/if}}" aria-hidden="true"></i>
-        <span><strong>{{play.scene.uso.label}}</strong>{{#if play.scene.uso.frase}} — «{{play.scene.uso.frase}}»{{/if}}<small>{{#if play.scene.uso.granted}}{{localize "BR.Use.Granted"}}{{else if play.scene.uso.denied}}{{localize "BR.Use.Denied"}}{{else}}{{localize "BR.Use.Asked"}}{{/if}}</small></span>
-      </p>
-      <div class="br-row-end">
-        {{#if play.scene.canAnswer}}<button type="button" class="br-primary" data-action="useYes">{{localize "BR.Use.Yes"}}</button><button type="button" data-action="useNo">{{localize "BR.Use.No"}}</button>{{/if}}
-        {{#if @root.can.bruja}}<button type="button" class="br-link" data-action="useWithdraw">{{localize "BR.Use.Withdraw"}}</button>{{/if}}
-      </div>
-    {{else if play.scene.canAsk}}
-      <p class="br-hint">{{localize "BR.Use.Hint"}}</p>
-      <div class="br-use-form">
-        <select name="usoQue" aria-label="{{localize 'BR.Use.Title'}}">{{#each play.scene.useOptions}}<option value="{{que}}">{{label}}</option>{{/each}}</select>
-        <input type="text" name="usoFrase" maxlength="240" placeholder="{{localize 'BR.Use.Placeholder'}}" aria-label="{{localize 'BR.Use.Placeholder'}}">
-        <button type="button" data-action="useAsk">{{localize "BR.Use.Ask"}}</button>
-      </div>
-    {{else}}<p class="br-hint">{{localize "BR.Use.None"}}</p>{{/if}}
-  </div>
-  {{/unless}}
-
-  <div class="br-close">
-    <label><span>{{#if play.scene.tirada}}{{localize "BR.Scene.CloseNote"}}{{else}}{{localize "BR.Scene.CloseNoteNoRoll"}}{{/if}}</span>
-      <textarea name="nota" rows="3" maxlength="800" placeholder="{{localize 'BR.Scene.NotePlaceholder'}}">{{play.scene.nota}}</textarea>
-    </label>
-    <button type="button" class="br-primary" data-action="closeScene"><i class="fa-solid fa-feather" aria-hidden="true"></i> {{localize "BR.Scene.Close"}}</button>
+    <div class="br-close">
+      <label><span>{{#if play.scene.tirada}}{{localize "BR.Scene.CloseNote"}}{{else}}{{localize "BR.Scene.CloseNoteNoRoll"}}{{/if}}</span>
+        <textarea name="nota" rows="3" maxlength="800" placeholder="{{localize 'BR.Scene.NotePlaceholder'}}">{{play.scene.nota}}</textarea>
+      </label>
+      <button type="button" class="br-primary" data-action="closeScene"><i class="fa-solid fa-feather" aria-hidden="true"></i> {{localize "BR.Scene.Close"}}</button>
+    </div>
   </div>
 </section>
 {{/if}}

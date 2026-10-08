@@ -1,14 +1,14 @@
 <div class="br-prep">
-  <section class="br-prep-intro">
+  <header class="br-prep-head">
     <h2>{{localize "BR.Prep.Title"}}</h2>
     <p class="br-lede">{{localize "BR.Prep.Intro"}}</p>
-  </section>
+  </header>
 
   <section class="br-seats" aria-label="{{localize 'BR.Prep.Seats'}}">
     {{#each prep.seats}}
     <article class="br-seat {{#if taken}}taken{{/if}} {{#if mine}}mine{{/if}}">
       <img src="{{portrait}}" alt="">
-      <div>
+      <div class="br-seat-text">
         <h3>{{label}}</h3>
         <p class="br-hint">{{hint}}</p>
         {{#if taken}}<p class="br-who"><i class="fa-solid fa-user" aria-hidden="true"></i> {{name}}{{#if mine}} · {{localize "BR.Seat.You"}}{{/if}}</p>{{/if}}
@@ -21,48 +21,51 @@
     {{/each}}
   </section>
 
-  <section class="br-card-form">
-    <h3>{{localize "BR.Prep.Witch"}}</h3>
-    <div class="br-two">
-      <label><span>{{localize "BR.Prep.Name"}}</span><input type="text" name="nombre" value="{{prep.fields.nombre}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
-      <label><span>{{localize "BR.Prep.Nick"}}</span><input type="text" name="apodo" value="{{prep.fields.apodo}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
-    </div>
-    {{#if prep.canEdit}}<p class="br-chips" aria-label="{{localize 'BR.Prep.Ideas'}}">{{#each prep.fields.names}}<button type="button" class="br-chip" data-action="chip" data-field="{{field}}" data-text="{{text}}">{{text}}</button>{{/each}}</p>{{/if}}
+  <section class="br-book">
+    <div class="br-leaf">
+      <h3 class="br-leaf-title">{{localize "BR.Prep.Witch"}}</h3>
+      <div class="br-two">
+        <label><span>{{localize "BR.Prep.Name"}}</span><input type="text" name="nombre" value="{{prep.fields.nombre}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
+        <label><span>{{localize "BR.Prep.Nick"}}</span><input type="text" name="apodo" value="{{prep.fields.apodo}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
+      </div>
+      {{#if prep.canEdit}}<p class="br-chips" aria-label="{{localize 'BR.Prep.Ideas'}}">{{#each prep.fields.names}}<button type="button" class="br-chip" data-action="chip" data-field="{{field}}" data-text="{{text}}">{{text}}</button>{{/each}}</p>{{/if}}
 
-    <label><span>{{localize "BR.Prep.Trait"}}</span><input type="text" name="rasgo" value="{{prep.fields.rasgo}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
-    <p class="br-hint">{{localize "BR.Prep.TraitHint"}}</p>
-    {{#if prep.canEdit}}<p class="br-chips">{{#each prep.fields.traits}}<button type="button" class="br-chip" data-action="chip" data-field="{{field}}" data-text="{{text}}">{{text}}</button>{{/each}}</p>{{/if}}
+      <label><span>{{localize "BR.Prep.Trait"}}</span><input type="text" name="rasgo" value="{{prep.fields.rasgo}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
+      <p class="br-hint">{{localize "BR.Prep.TraitHint"}}</p>
+      {{#if prep.canEdit}}<p class="br-chips">{{#each prep.fields.traits}}<button type="button" class="br-chip" data-action="chip" data-field="{{field}}" data-text="{{text}}">{{text}}</button>{{/each}}</p>{{/if}}
 
-    <h3>{{localize "BR.Prep.Bag"}}</h3>
-    <p class="br-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> {{prep.note}}</p>
-    {{#each prep.fields.bolsa}}
-    <div class="br-bag-field">
-      <label><span><i class="fa-solid {{icon}}" aria-hidden="true"></i> {{label}}</span><input type="text" name="bolsa.{{i}}.nombre" value="{{nombre}}" {{#unless @root.prep.canEdit}}disabled{{/unless}}></label>
-      <label><span>{{localize "BR.Prep.Detail"}}</span><input type="text" name="bolsa.{{i}}.detalle" value="{{detalle}}" {{#unless @root.prep.canEdit}}disabled{{/unless}}></label>
-      <p class="br-hint">{{hint}}</p>
-      {{#if @root.prep.canEdit}}<p class="br-chips">{{#each chips}}<button type="button" class="br-chip" data-action="chip" data-field="{{field}}" data-text="{{text}}">{{text}}</button>{{/each}}</p>{{/if}}
+      <h3 class="br-leaf-title">{{localize "BR.Prep.Options"}}</h3>
+      <div class="br-two">
+        <label><span>{{localize "BR.Prep.InitialPd"}}</span><input type="number" name="pdIniciales" min="0" max="9" value="{{prep.ajustes.pdIniciales}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
+        <label class="br-check"><input type="checkbox" name="ultimoAliento" {{#if prep.ajustes.ultimoAliento}}checked{{/if}} {{#unless prep.canEdit}}disabled{{/unless}}><span>{{localize "BR.Prep.LastBreath"}}</span></label>
+      </div>
+      <p class="br-hint">{{localize "BR.Prep.OptionsHint"}}</p>
     </div>
-    {{/each}}
+
+    <div class="br-leaf">
+      <h3 class="br-leaf-title">{{localize "BR.Prep.Bag"}}</h3>
+      <p class="br-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> {{prep.note}}</p>
+      {{#each prep.fields.bolsa}}
+      <div class="br-bag-field">
+        <img class="br-bag-sprite" src="{{sprite}}" alt="">
+        <div class="br-bag-inputs">
+          <label><span>{{label}}</span><input type="text" name="bolsa.{{i}}.nombre" value="{{nombre}}" {{#unless @root.prep.canEdit}}disabled{{/unless}}></label>
+          <label><span>{{localize "BR.Prep.Detail"}}</span><input type="text" name="bolsa.{{i}}.detalle" value="{{detalle}}" {{#unless @root.prep.canEdit}}disabled{{/unless}}></label>
+          {{#if @root.prep.canEdit}}<p class="br-chips">{{#each chips}}<button type="button" class="br-chip" data-action="chip" data-field="{{field}}" data-text="{{text}}">{{text}}</button>{{/each}}</p>{{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
   </section>
 
-  <section class="br-card-form">
-    <h3>{{localize "BR.Prep.Options"}}</h3>
-    <div class="br-two">
-      <label><span>{{localize "BR.Prep.InitialPd"}}</span><input type="number" name="pdIniciales" min="0" max="9" value="{{prep.ajustes.pdIniciales}}" {{#unless prep.canEdit}}disabled{{/unless}}></label>
-      <label class="br-check"><input type="checkbox" name="ultimoAliento" {{#if prep.ajustes.ultimoAliento}}checked{{/if}} {{#unless prep.canEdit}}disabled{{/unless}}><span>{{localize "BR.Prep.LastBreath"}}</span></label>
-    </div>
-    <p class="br-hint">{{localize "BR.Prep.OptionsHint"}}</p>
-  </section>
-
-  <section class="br-setting-card">
-    <h3>{{localize "BR.Prep.Setting"}}</h3>
-    <p>{{prep.intro}}</p>
+  <details class="br-setting-strip" data-memory="setting">
+    <summary><i class="fa-solid fa-map" aria-hidden="true"></i> {{localize "BR.Prep.Setting"}} — {{prep.intro}}</summary>
     <div class="br-three">
       <div><h4>{{localize "BR.Prep.Places"}}</h4><ul>{{#each prep.places}}<li>{{this}}</li>{{/each}}</ul></div>
       <div><h4>{{localize "BR.Prep.People"}}</h4><ul>{{#each prep.people}}<li>{{this}}</li>{{/each}}</ul></div>
       <div><h4>{{localize "BR.Prep.Dangers"}}</h4><ul>{{#each prep.dangers}}<li>{{this}}</li>{{/each}}</ul></div>
     </div>
-  </section>
+  </details>
 
   <footer class="br-start">
     {{#unless prep.bothSeated}}<p class="br-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> {{localize "BR.Prep.NeedSeats"}}</p>{{/unless}}

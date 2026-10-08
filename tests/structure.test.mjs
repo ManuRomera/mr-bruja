@@ -98,3 +98,11 @@ test("el estado público y el diagnóstico nunca contienen el texto secreto", ()
 test("ningún chat ni notificación incluye el texto de una consecuencia", () => {
   for (const f of walk("module")) assert.doesNotMatch(read(f), /ChatMessage[\s\S]{0,200}textos/, f);
 });
+
+test("las fuentes del @font-face existen y llevan su licencia OFL", () => {
+  const css = read("styles/system.css");
+  const urls = [...css.matchAll(/@font-face[^}]*url\("\.\.\/(fonts\/[^"]+)"\)/g)].map(m => m[1]);
+  assert.ok(urls.length >= 5);
+  for (const u of urls) assert.ok(existsSync(join(root, u)), u);
+  assert.match(read("fonts/OFL.txt"), /SIL OPEN FONT LICENSE Version 1\.1/);
+});

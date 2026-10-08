@@ -7,11 +7,30 @@
 <div class="br-choza phase-{{fase}}" data-tipo="{{tipoEscena}}" style="--br-escena:{{colorEscena}}; --br-bg:{{bg}}">
   <div class="br-atmos" aria-hidden="true">{{#each motas}}<i style="--i:{{this}}"></i>{{/each}}</div>
 
-  <header class="br-head">
-    <div class="br-head-title">
+  {{!-- Cabecera: el lomo del libro. Título, velas, frasco de PD y herramientas. --}}
+  <header class="br-hud">
+    <div class="br-hud-title">
       <h1>{{setting.name}}</h1>
       <p>{{faseLabel}}</p>
     </div>
+
+    {{#unless isPrep}}
+    <div class="br-hud-candles" role="img" aria-label="{{localize 'BR.Side.CandlesLabel'}}: {{bruja.lit}} / 5" data-tooltip="{{localize 'BR.Side.CandlesHint'}}">
+      <ol>
+        {{#each bruja.velas}}
+        <li class="{{#if on}}lit{{else}}out{{/if}}"><img src="systems/mr-bruja/assets/art/objects/vela.webp" alt=""><i class="br-flame" aria-hidden="true"></i>{{#unless on}}<i class="br-x fa-solid fa-xmark" aria-hidden="true"></i>{{/unless}}</li>
+        {{/each}}
+      </ol>
+      <small>{{localize "BR.Side.Candles"}}</small>
+    </div>
+
+    <div class="br-hud-flask" role="img" aria-label="{{localize 'BR.Side.PdAvailable'}}: {{side.pd}}" data-tooltip="{{localize 'BR.Side.PdGoal'}}: {{side.goal}}%" style="--fill:{{side.fill}}%">
+      <span class="br-flask"><img src="systems/mr-bruja/assets/art/objects/frasco.webp" alt=""><i class="br-liquid" aria-hidden="true"></i></span>
+      <span class="br-hud-pd"><b>{{side.pd}}</b><small>PD</small></span>
+      <span class="br-goal" aria-hidden="true"><i style="width:{{side.goal}}%"></i></span>
+    </div>
+    {{/unless}}
+
     {{#if spectator}}<span class="br-badge"><i class="fa-solid fa-eye" aria-hidden="true"></i> {{localize "BR.Table.Spectator"}}</span>{{/if}}
     <nav class="br-head-tools" aria-label="{{localize 'BR.Table.Tools'}}">
       <button type="button" data-action="flip" data-tooltip="{{faceLabel}}" aria-label="{{faceLabel}}"><i class="fa-solid fa-clone" aria-hidden="true"></i></button>

@@ -17,7 +17,7 @@ Es una herramienta de mesa gratuita y **no oficial** para quien tiene el libro. 
 - **Código e interfaz**: originales de este proyecto (licencia MIT, ver `LICENSE`).
 - **Arte** (`assets/`): original, generado con IA para este proyecto siguiendo `docs/INSTRUCCIONES-IA-IMAGENES.md` y retocado por código (recortes, WebP, transparencias). **No** se usa ninguna ilustración, maquetación, logotipo ni carta del libro.
 - **Sonido**: sintetizado en el navegador con Web Audio; no hay archivos de audio.
-- **Tipografía**: se usan fuentes del sistema operativo; no se distribuye ninguna.
+- **Tipografía** (`fonts/`, SIL Open Font License 1.1, ver `fonts/OFL.txt`): IM Fell (Igino Marini) y Caveat, incluidas sin modificar.
 
 ## Qué NO incluye
 

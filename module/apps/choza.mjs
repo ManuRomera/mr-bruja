@@ -10,7 +10,11 @@ import { avisos, rolesDe, totales } from "../motor.mjs";
 import { activas, dadosDisponibles, escenaPermitida, pdDisponibles } from "../reglas.mjs";
 import { get, set } from "../settings.mjs";
 
-const CATS = [{ cat: "orientar", icon: "fa-compass" }, { cat: "cambiar", icon: "fa-right-left" }, { cat: "comer", icon: "fa-bread-slice" }];
+const CATS = [
+  { cat: "orientar", icon: "fa-compass", sprite: ASSETS.object["luna-creciente"] },
+  { cat: "cambiar", icon: "fa-right-left", sprite: ASSETS.object["llave-candado"] },
+  { cat: "comer", icon: "fa-bread-slice", sprite: ASSETS.object.setas }
+];
 const val = (root, name) => root.querySelector(`[name="${name}"]`)?.value ?? "";
 const MOTAS = Array.from({ length: 14 }, (_, i) => i);
 
@@ -167,7 +171,7 @@ export class ChozaApp extends SystemApp {
         nombre: b.nombre, apodo: b.apodo, rasgo: b.rasgo,
         names: picks(def.names, "nombre"), traits: picks(def.traits, "rasgo"),
         bolsa: b.bolsa.map((o, i) => ({
-          i, cat: o.cat, icon: CATS[i].icon, label: t(`BR.Bag.${o.cat}`), hint: t(`BR.Bag.${o.cat}Hint`), nombre: o.nombre, detalle: o.detalle,
+          i, cat: o.cat, icon: CATS[i].icon, sprite: CATS[i].sprite, label: t(`BR.Bag.${o.cat}`), hint: t(`BR.Bag.${o.cat}Hint`), nombre: o.nombre, detalle: o.detalle,
           chips: picks(def.items[o.cat] ?? [], `bolsa.${i}.nombre`)
         }))
       },

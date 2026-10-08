@@ -1,5 +1,17 @@
 # Cambios
 
+## 0.2.0 · 2026-10-09
+
+Rediseño gráfico y de distribución de La Choza.
+
+- **Mesa de madera con hojas de pergamino**: la hoja de la Bruja y las de herederas y recetas imitan las del libro (marco negro de esquinas cóncavas, líneas punteadas, escritura a mano), con el retrato, la bolsa con su iconografía y la rana de la hoja original.
+- **Cabecera de tela azul con oro cuarteado** (el lomo del libro): título, las cinco velas y el frasco de puntos de drama siempre a la vista.
+- **La escena es un libro abierto** de dos hojas con lomo central: planteamiento y rasgo/objeto a la izquierda; caldero, tirada, resultado y cierre a la derecha. Con una escena abierta las cartas se encogen para dejar sitio al libro.
+- **Cartas en abanico** al elegir escena.
+- **Preparación** como libro abierto (la Bruja a la izquierda, la bolsa a la derecha) con los asientos como etiquetas de pergamino.
+- **Tipografía empaquetada**: IM Fell (grabado inglés) y Caveat (notas a mano), con su licencia.
+- Modo oscuro, lectura y alto contraste adaptados a los componentes nuevos.
+
 ## 0.1.1 · 2026-10-09
 
 - Repositorio público: avisos de uso y permisos actualizados; instalación por manifiesto.
