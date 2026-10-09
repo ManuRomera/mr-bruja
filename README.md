@@ -1,6 +1,12 @@
 # MR- Bruja
 
+![Foundry VTT 13–14](https://img.shields.io/badge/Foundry%20VTT-13%20%E2%80%93%2014-informational) ![Versión](https://img.shields.io/github/v/release/ManuRomera/mr-bruja) ![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green) ![No oficial](https://img.shields.io/badge/juego-no%20oficial-lightgrey)
+
+![MR- Bruja](docs/img/cover.png)
+
 Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición de El Refugio de Ryhope): un juego de narración compartida **para dos personas** sobre una vieja bruja que debe encontrar heredera antes de morir. **Necesitas el libro**; aquí no hay texto suyo (ver `NOTICE.md`).
+
+![La Choza con una escena en curso](docs/img/choza-escena.webp)
 
 ## Qué hace
 
@@ -12,6 +18,8 @@ Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición d
 - **Reglas** dentro del juego: un resumen propio y, si lo importas de tu PDF, el texto de tu manual (pestaña «El libro»).
 - **Una persona o dos**: una sola puede ocupar los dos asientos para jugar en solitario; dos personas se alternan.
 - **Cuidado**: modo oscuro, modo lectura, alto contraste, texto grande, botones grandes, movimiento reducido, volúmenes por usuario, líneas y velos, Tarjeta X anónima, ventanas que recuerdan su posición, español e inglés.
+
+![La Choza en modo oscuro](docs/img/modo-oscuro.webp)
 
 ## Instalación
 
@@ -33,5 +41,7 @@ npm run check   # sintaxis, JSON y rutas de arte
 npm run build   # dist/mr-bruja.zip
 python3 scripts/import-art.py <carpeta-del-zip-descomprimido>
 ```
+
+Página: https://manuromera.github.io/mr-bruja/
 
 Ambientaciones adicionales: `game.mrBruja.registerSetting({ id, name, where, places, people, dangers, names, traits, items: { orientar, cambiar, comer }, sparks, questions })` (ver `module/data/cuento.mjs`).

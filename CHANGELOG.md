@@ -1,5 +1,11 @@
 # Cambios
 
+## 0.2.1 · 2026-10-09
+
+- Carátula (`docs/img/cover.png`), capturas, página de GitHub Pages y README con portada.
+- Modo oscuro: el fondo de la mesa se oscurece; casilla «Último aliento» legible.
+- El zip de la release ya no incluye `docs/`.
+
 ## 0.2.0 · 2026-10-09
 
 Rediseño gráfico y de distribución de La Choza.

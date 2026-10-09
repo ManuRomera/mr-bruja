@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>MR- Bruja · carátula</title>
+<style>
+@font-face { font-family: "Fell Display"; src: url("fonts/imfe-dprm.otf"); }
+@font-face { font-family: "Fell"; src: url("fonts/imfe-gprm.otf"); }
+@font-face { font-family: "Fell"; src: url("fonts/imfe-gpit.otf"); font-style: italic; }
+@font-face { font-family: "Fell SC"; src: url("fonts/imfe-dwpscr.ttf"); }
+html, body { margin: 0; width: 1280px; height: 640px; overflow: hidden; background: #0f2a35; }
+.cover { position: relative; width: 1280px; height: 640px; overflow: hidden; color: #f1e4bb; font-family: "Fell", Georgia, serif;
+  background: linear-gradient(90deg, rgba(4, 14, 19, .9) 0%, rgba(4, 14, 19, .55) 52%, rgba(4, 14, 19, .08) 100%), url("../assets/art/textures/tela-azul-oro.webp") center / 820px; }
+.cover::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 72% 55%, transparent 40%, rgba(2, 8, 11, .55) 100%); pointer-events: none; }
+.frame { position: absolute; inset: 18px; z-index: 5; pointer-events: none; border: 14px solid transparent;
+  border-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><path d='M14 2H50A12 12 0 0 0 62 14V50A12 12 0 0 0 50 62H14A12 12 0 0 0 2 50V14A12 12 0 0 0 14 2Z' fill='none' stroke='%23c9a24a' stroke-width='3'/></svg>") 14 / 14px / 0 stretch; }
+.text { position: absolute; left: 82px; top: 86px; width: 520px; z-index: 3; }
+.kicker { font-family: "Fell SC"; font-size: 30px; letter-spacing: .32em; color: #c9a24a; margin: 0 0 6px 6px; }
+h1 { font-family: "Fell Display"; font-weight: 400; font-size: 166px; line-height: .9; margin: 0; letter-spacing: .01em; color: #f4e8c3; text-shadow: 0 5px 0 rgba(0, 0, 0, .5), 0 0 40px rgba(201, 162, 74, .35); }
+.sub { font-style: italic; font-size: 31px; line-height: 1.25; margin: 20px 0 0 6px; color: #e8dcb8; max-width: 500px; text-shadow: 0 2px 6px #000; }
+.chips { display: flex; gap: 10px; margin: 26px 0 0 6px; flex-wrap: nowrap; }
+.chips span { font-family: "Fell SC"; font-size: 17px; letter-spacing: .12em; padding: 6px 13px; white-space: nowrap; border: 1.5px solid #c9a24a; border-radius: 999px; color: #f1e4bb; background: rgba(0, 0, 0, .3); }
+.candles { position: absolute; left: 90px; bottom: 44px; display: flex; gap: 22px; z-index: 3; align-items: flex-end; }
+.candles li { position: relative; list-style: none; width: 34px; display: grid; justify-items: center; }
+.candles ul { margin: 0; padding: 0; display: contents; }
+.candles img { height: 84px; margin-top: 28px; filter: invert(1) sepia(.35) brightness(.95); }
+.candles i { position: absolute; top: 0; width: 24px; height: 38px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(ellipse at 50% 70%, #fff6c8 0, #ffc857 42%, rgba(255, 140, 40, 0) 72%); box-shadow: 0 0 26px 8px rgba(255, 190, 80, .5); }
+.candles li.out img { opacity: .35; } .candles li.out i { display: none; }
+.fan { position: absolute; right: 30px; top: 78px; width: 610px; height: 510px; z-index: 2; }
+.card { position: absolute; bottom: 26px; width: 192px; height: 329px; border: 4px solid #17120d; border-radius: 13px; overflow: hidden; background: var(--c); box-shadow: 0 18px 34px rgba(0, 0, 0, .7); transform-origin: 50% 118%; }
+.card img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: luminosity; }
+.card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .8)); }
+.card b { position: absolute; z-index: 2; left: 0; right: 0; bottom: 14px; text-align: center; font-family: "Fell SC"; font-weight: 400; font-size: 22px; letter-spacing: .08em; color: #fff; text-shadow: 0 2px 5px #000; }
+.moon { position: absolute; right: 90px; top: 46px; width: 74px; z-index: 1; filter: invert(1) sepia(.5) brightness(1.05); opacity: .8; }
+.cauldron { position: absolute; left: 560px; bottom: 26px; width: 170px; z-index: 6; filter: invert(1) sepia(.35) brightness(.95) drop-shadow(0 0 22px rgba(95, 224, 138, .55)); }
+</style></head><body>
+<div class="cover">
+  <div class="text">
+    <p class="kicker">MR-</p>
+    <h1>Bruja</h1>
+    <p class="sub">Una vieja bruja, una heredera por encontrar y cinco velas que se apagan.</p>
+    <div class="chips"><span>Foundry VTT 13–14</span><span>Para dos</span><span>Modo oscuro</span></div>
+  </div>
+  <ul class="candles" style="padding:0;margin:0">
+    <li><img src="../assets/art/objects/vela.webp" alt=""><i></i></li><li><img src="../assets/art/objects/vela.webp" alt=""><i></i></li>
+    <li><img src="../assets/art/objects/vela.webp" alt=""><i></i></li><li><img src="../assets/art/objects/vela.webp" alt=""><i></i></li>
+    <li class="out"><img src="../assets/art/objects/vela.webp" alt=""><i></i></li>
+  </ul>
+  <img class="moon" src="../assets/art/objects/luna-creciente.webp" alt="">
+  <img class="cauldron" src="../assets/art/objects/caldero.webp" alt="">
+  <div class="fan">
+    <div class="card" style="--c:#8e2231; left: 0;     transform: rotate(-21deg) translateY(30px); z-index: 1"><img src="../assets/art/cards/escena-accion.webp" alt=""><b>Acción</b></div>
+    <div class="card" style="--c:#2c4f8a; left: 100px; transform: rotate(-10.5deg) translateY(6px); z-index: 2"><img src="../assets/art/cards/escena-reaccion.webp" alt=""><b>Reacción</b></div>
+    <div class="card" style="--c:#c9a92b; left: 205px; transform: rotate(0deg); z-index: 3"><img src="../assets/art/cards/escena-drama.webp" alt=""><b>Drama</b></div>
+    <div class="card" style="--c:#6b4a2b; left: 310px; transform: rotate(10.5deg) translateY(6px); z-index: 4"><img src="../assets/art/cards/escena-monologo.webp" alt=""><b>Monólogo</b></div>
+    <div class="card" style="--c:#3e7a4f; left: 410px; transform: rotate(21deg) translateY(30px); z-index: 5"><img src="../assets/art/cards/escena-retrospeccion.webp" alt=""><b>Retrospección</b></div>
+  </div>
+  <div class="frame"></div>
+</div>
+</body></html>

@@ -108,7 +108,8 @@
 .mr-br textarea { resize: vertical; line-height: 1.5; min-height: 3em; }
 .mr-br input:focus, .mr-br select:focus, .mr-br textarea:focus { outline: none; border-color: var(--br-oro-2); box-shadow: 0 0 0 2px rgba(201, 162, 74, .3); }
 .mr-br select option { color: #111; background: var(--br-perg); }
-.mr-br input[type=checkbox] { width: 1.1em; height: 1.1em; accent-color: var(--br-oro); flex: 0 0 auto; }
+.mr-br input[type=checkbox] { appearance: auto; -webkit-appearance: checkbox; width: 1.15em; height: 1.15em; margin: 0; padding: 0; background: transparent; border: 0; accent-color: var(--br-tinta); flex: 0 0 auto; }
+.br-dark .mr-br input[type=checkbox] { accent-color: var(--br-oro); }
 .mr-br label { display: flex; flex-direction: column; gap: .25em; font-size: .85em; letter-spacing: .03em; color: var(--br-muted); }
 .mr-br label.br-check { flex-direction: row; align-items: center; gap: .5em; }
 .mr-br .br-lede { color: inherit; opacity: .8; font-style: italic; }
@@ -278,7 +279,7 @@
 @keyframes br-pawn { from { transform: translateY(-40px) scale(1.6); opacity: 0; } to { transform: none; opacity: 1; } }
 
 /* Con una escena abierta, las cartas se encogen: lo que importa es el libro */
-.mr-br .br-card-row.compact { grid-template-columns: repeat(5, 70px); justify-content: start; gap: .6rem; padding: 0; }
+.mr-br .br-card-row.compact { grid-template-columns: repeat(5, minmax(0, 78px)); justify-content: center; gap: .8rem; padding: 0; }
 .mr-br .br-card-row.compact .br-scene-card { transform: none; }
 .mr-br .br-card-row.compact small, .mr-br .br-card-row.compact .br-last-tag { display: none; }
 .mr-br .br-card-row.compact .br-card-title { font-size: .5em; letter-spacing: 0; bottom: .3rem; padding: 0; white-space: nowrap; }
@@ -554,7 +555,7 @@
 .br-dark .mr-br .br-total { color: #e07a8a; } .br-dark .mr-br .br-result.nivel-granExito .br-total, .br-dark .mr-br .br-result.nivel-abrumador .br-total { color: #8fd09b; } .br-dark .mr-br .br-result.nivel-parcial .br-total { color: #e8c05a; }
 .br-dark .mr-br .br-gains .pd { color: #8fd09b; } .br-dark .mr-br .br-gains .cons { color: #e07a8a; }
 .br-dark .mr-br .br-dice-count, .br-dark .mr-br .br-use-line.granted i { color: #8fd09b; }
-.br-dark .mr-br .br-choza::before { opacity: .55; }
+.br-dark .mr-br .br-choza::before { filter: brightness(.34) saturate(.8); }
 .br-dark .mr-br .br-panel { background: rgba(6, 16, 20, .92); }
 .br-dark .mr-br .br-card-art img { opacity: .8; }
 .br-dark .mr-br .br-hand, .br-dark .mr-br .br-final-text { color: #e6dcc3; }

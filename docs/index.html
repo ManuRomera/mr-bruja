@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MR- Bruja</title>
+<meta name="description" content="Sistema no oficial de Foundry VTT para Bruja: una vieja bruja, una heredera por encontrar y cinco velas que se apagan.">
+<meta property="og:title" content="MR- Bruja · Foundry VTT"><meta property="og:image" content="https://manuromera.github.io/mr-bruja/img/cover.png"><meta property="og:description" content="Una vieja bruja, una heredera por encontrar y cinco velas que se apagan.">
+<style>
+@font-face{font-family:"Fell Display";src:url("fonts/imfe-dprm.otf")}
+@font-face{font-family:"Fell";src:url("fonts/imfe-gprm.otf")}
+@font-face{font-family:"Fell";src:url("fonts/imfe-gpit.otf");font-style:italic}
+@font-face{font-family:"Fell SC";src:url("fonts/imfe-dwpscr.ttf")}
+:root{--tela:#163845;--oro:#c9a24a;--perg:#e8dec3;--tinta:#1b1612;--acc:#8e2231}
+*{box-sizing:border-box}
+body{margin:0;background:var(--perg) url("img/papel.webp") center/520px;color:var(--tinta);font:20px/1.65 "Fell",Georgia,serif}
+header{background:var(--tela);color:#f1e4bb;text-align:center;border-bottom:4px solid var(--oro);padding:0 0 2.2rem}
+header img.cover{display:block;width:100%;max-width:1280px;margin:0 auto}
+header p{max-width:38rem;margin:1.4rem auto 1.6rem;font-style:italic;font-size:1.15em;padding:0 1rem}
+.btn{display:inline-block;margin:.3rem;padding:.65em 1.5em;background:var(--oro);color:var(--tinta);text-decoration:none;font-family:"Fell SC";letter-spacing:.12em;border:2px solid #e2c47a;border-radius:3px}
+.btn.alt{background:transparent;color:#f1e4bb;border-color:var(--oro)}.btn:hover{box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+main{max-width:900px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+h2{font-family:"Fell Display";font-weight:400;font-size:1.9em;letter-spacing:.03em;border-bottom:1px solid var(--acc);padding-bottom:.15rem;margin:3rem 0 .8rem}
+img.shot{display:block;width:100%;border:3px solid var(--tinta);border-radius:4px;box-shadow:0 10px 26px rgba(0,0,0,.4);margin:1.3rem 0 .4rem}
+figcaption{font-style:italic;font-size:.9em;opacity:.75;text-align:center;margin-bottom:1.6rem}figure{margin:0}
+ul{padding-left:1.2rem}li{margin:.45rem 0}
+code{background:rgba(27,22,18,.12);padding:.1em .45em;border-radius:3px;font-size:.85em;word-break:break-all}
+.warn{border-left:4px solid var(--oro);background:rgba(201,162,74,.18);padding:.6rem 1rem;margin:1.5rem 0}
+footer{text-align:center;opacity:.65;font-size:.8em;padding:2rem;font-family:"Fell SC";letter-spacing:.1em}
+</style></head><body>
+<header>
+<img class="cover" src="img/cover.png" alt="MR- Bruja: las cinco cartas de escena, el caldero y las velas">
+<p>Un juego de narración compartida para dos personas, llevado a Foundry VTT con caldero, velas y grabados.</p>
+<a class="btn" href="https://github.com/ManuRomera/mr-bruja/releases/latest">Descargar</a><a class="btn alt" href="https://github.com/ManuRomera/mr-bruja">Repositorio</a>
+</header>
+<main>
+<figure><img class="shot" src="img/choza-escena.webp" alt="La Choza con una escena en curso"><figcaption>La Choza: la escena es un libro abierto; las velas y el frasco de puntos de drama, siempre a la vista.</figcaption></figure>
+
+<h2>Una bruja, una heredera</h2>
+<p>La Bruja se despide del mundo y necesita a alguien que se haga cargo de su choza. Un Director de juego interpreta a todos los demás. Se juegan escenas de cinco tipos, se tira en el caldero y cada fracaso apaga una vela. Con las cinco apagadas, muere sin heredera.</p>
+
+<h2>Qué incluye</h2>
+<ul>
+<li><strong>La Choza</strong>: mesa con la hoja de la Bruja, el libro de la escena, herederas y recetas de puntos de drama.</li>
+<li><strong>Cinco cartas de escena</strong> con grabados originales y el peón que se desliza a la elegida; no se repite tipo salvo descansando.</li>
+<li><strong>Consecuencias secretas de verdad</strong>: la Libreta del Director va cifrada; la Bruja solo ve cuántas velas quedan.</li>
+<li><strong>Grimorio</strong> autogenerado con toda la historia: se copia, se descarga o se guarda en Diarios.</li>
+<li>Modo oscuro, lectura, alto contraste, texto y botones grandes, movimiento reducido, volúmenes por usuario.</li>
+<li>Líneas y velos, Tarjeta X anónima, sonido sintetizado, español e inglés.</li>
+<li>En solitario o a dos.</li></ul>
+
+<figure><img class="shot" src="img/preparacion.webp" alt="Preparación de la partida"><figcaption>Antes de salir de la choza: nombre, rasgo y una bolsa con tres objetos.</figcaption></figure>
+<figure><img class="shot" src="img/modo-oscuro.webp" alt="La Choza en modo oscuro"><figcaption>Modo oscuro, en las opciones de accesibilidad.</figcaption></figure>
+<figure><img class="shot" src="img/libreta.webp" alt="La Libreta del Director"><figcaption>La Libreta del Director, en su página mostaza.</figcaption></figure>
+<figure><img class="shot" src="img/grimorio.webp" alt="El Grimorio"><figcaption>El Grimorio de la bruja, escena a escena.</figcaption></figure>
+
+<h2>Instalación</h2>
+<p>En Foundry, <em>Sistemas → Instalar sistema</em>, y pega:</p>
+<p><code>https://github.com/ManuRomera/mr-bruja/releases/latest/download/system.json</code></p>
+
+<h2>Créditos y avisos</h2>
+<p><strong>Bruja</strong> es un juego de <strong>jim pinto</strong> (Post World Games), en su edición castellana de <strong>El Refugio de Ryhope</strong>. Este sistema es de <a href="https://github.com/ManuRomera">Manu Romera</a>, no es oficial y <strong>necesita el libro</strong>: no incluye su texto ni sus ilustraciones; el arte es original.</p>
+<p class="warn">Si te gusta el juego, <strong>cómpralo</strong> y apoya a sus autores.</p>
+</main>
+<footer>MR · Manu Romera · Digital RPG Design</footer>
+</body></html>
