@@ -42,6 +42,12 @@ export function medirInterfaz(el) {
   el.style.setProperty("--br-abajo", `${abajo}px`);
 }
 
+/** ¿Hay una escena con imagen de fondo que pueda verse detrás de la mesa? */
+export function escenaTieneFondo() {
+  const escena = globalThis.canvas?.scene ?? game.scenes?.viewed;
+  return Boolean(escena?.background?.src || escena?.img);
+}
+
 let observador = null;
 /** Mantiene las medidas al día cuando se abre o cierra la barra lateral o cambia el tamaño de la ventana. */
 export function vigilarInterfaz(obtenerElemento) {
@@ -77,14 +83,31 @@ export function pastilla({ visible, texto, alPulsar }) {
  * justo para taparlas.
  */
 export function registrarCoberturaDeFondo() {
+  const esNuestra = escena => Boolean(escena && (escena.getFlag(SYSTEM_ID, "fondo") || String(escena.background?.src ?? "").includes(`systems/${SYSTEM_ID}/`)));
+  /** Encuadre que tapa toda la pantalla: centro de la escena y escala para cubrir. */
+  const encuadre = lienzo => {
+    const { width, height, x, y } = lienzo.dimensions.sceneRect, pantalla = lienzo.app.screen;
+    return { x: x + width / 2, y: y + height / 2, scale: Math.max(pantalla.width / width, pantalla.height / height) };
+  };
+  let ajustando = false;
   const cubrir = lienzo => {
     try {
-      if (!lienzo?.scene?.getFlag(SYSTEM_ID, "fondo")) return;
-      const { width, height, x, y } = lienzo.dimensions.sceneRect;
-      const pantalla = lienzo.app.screen;
-      lienzo.pan({ x: x + width / 2, y: y + height / 2, scale: Math.max(pantalla.width / width, pantalla.height / height) });
-    } catch (error) { console.warn(`${LOG} cobertura del fondo`, error); }
+      if (!lienzo?.ready || !esNuestra(lienzo.scene) || ajustando) return;
+      ajustando = true;
+      Promise.resolve(lienzo.pan({ ...encuadre(lienzo), duration: 0 })).finally(() => { ajustando = false; });
+    } catch (error) { ajustando = false; console.warn(`${LOG} cobertura del fondo`, error); }
   };
-  Hooks.on("canvasReady", lienzo => setTimeout(() => cubrir(lienzo), 50));
-  window.addEventListener("resize", () => { if (globalThis.canvas?.ready) cubrir(globalThis.canvas); });
+  // Foundry vuelve a encuadrar «para que quepa» tras cargar, y el ratón puede mover o ampliar el lienzo por debajo de la
+  // mesa: se reaplica tras la carga y cada vez que el encuadre se aparta del que cubre.
+  Hooks.on("canvasReady", lienzo => { for (const ms of [50, 400, 1200]) setTimeout(() => cubrir(lienzo), ms); });
+  Hooks.on("canvasPan", (lienzo, pos) => {
+    try {
+      if (ajustando || !lienzo?.ready || !esNuestra(lienzo.scene)) return;
+      const e = encuadre(lienzo);
+      if (Math.abs(pos.scale - e.scale) > 0.001 || Math.abs(pos.x - e.x) > 1 || Math.abs(pos.y - e.y) > 1) cubrir(lienzo);
+    } catch (error) { console.warn(`${LOG} cobertura del fondo`, error); }
+  });
+  window.addEventListener("resize", () => cubrir(globalThis.canvas));
+  // El lienzo ya se dibujó antes de `ready`: el primer canvasReady se perdió, así que se aplica ahora.
+  for (const ms of [0, 400, 1200]) setTimeout(() => cubrir(globalThis.canvas), ms);
 }

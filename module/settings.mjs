@@ -6,12 +6,12 @@ export const INKS = { soft: "#e8e2d4", paper: "#f2ede1", pearl: "#dfe3e8", amber
 const CLASS_TOGGLES = [
   ["darkMode", "br-dark"], ["readingMode", "br-reading"], ["plainFont", "br-plain-font"], ["wideSpacing", "br-wide-spacing"],
   ["highContrast", "br-high-contrast"], ["reducedMotion", "br-reduced-motion"], ["reducedEffects", "br-reduced-effects"],
-  ["largeButtons", "br-large-buttons"]
+  ["largeButtons", "br-large-buttons"], ["mesaMadera", "br-madera"]
 ];
 
 export const ACCESS_DEFAULTS = Object.freeze({
   textScale: 1, readingInk: "soft", darkMode: false, readingMode: false, plainFont: false, wideSpacing: false, highContrast: false,
-  reducedMotion: false, reducedEffects: false, largeButtons: false, soundFx: true, music: true,
+  reducedMotion: false, reducedEffects: false, largeButtons: false, mesaMadera: false, soundFx: true, music: true,
   sfxVolume: 0.6, ambientVolume: 0.35, musicVolume: 0.4
 });
 

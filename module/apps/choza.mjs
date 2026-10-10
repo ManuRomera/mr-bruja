@@ -10,7 +10,7 @@ import { avisos, rolesDe, totales } from "../motor.mjs";
 import { activas, dadosDisponibles, escenaPermitida, pdDisponibles } from "../reglas.mjs";
 import { get, set } from "../settings.mjs";
 import { ofrecerTutorial } from "../tutorial.mjs";
-import { medirInterfaz, modoMesa, pastilla, vigilarInterfaz } from "../mesa-pantalla.mjs";
+import { escenaTieneFondo, medirInterfaz, modoMesa, pastilla, vigilarInterfaz } from "../mesa-pantalla.mjs";
 
 const CATS = [
   { cat: "orientar", icon: "fa-compass", sprite: ASSETS.object["luna-creciente"] },
@@ -106,7 +106,7 @@ export class ChozaApp extends SystemApp {
       setting: { id: def.id, name: loc(def.name), tagline: loc(def.tagline) },
       faseLabel: e ? f("BR.Scene.Label", { n: e.n, tipo: t(`BR.Tipo.${e.tipo}`) }) : t(`BR.Fase.${fase}`),
       colorEscena: COLOR[tipoEscena] ?? "#c9a24a", tipoEscena,
-      bg: cssUrl(this.#background(state)), motas: MOTAS, face, faceLabel: t(face === "neutral" ? "BR.Cards.Engraved" : "BR.Cards.Neutral"),
+      bg: cssUrl(this.#background(state)), bgKind: this.#bgKind(state), motas: MOTAS, face, faceLabel: t(face === "neutral" ? "BR.Cards.Engraved" : "BR.Cards.Neutral"),
       tot, warnings: avisos(state).map(w => t(`BR.Warn.${w}`)),
       secretAccess: Boolean(secret),
       needsKey: GameService.lockReason() === "key"
@@ -120,6 +120,12 @@ export class ChozaApp extends SystemApp {
     ctx.recent = state.historial.filter(h => h.k === "escena").slice(-4).reverse().map(h => ({ n: h.n, tipo: t(`BR.Tipo.${h.tipo}`), color: COLOR[h.tipo], nivel: h.tirada ? t(`BR.Nivel.${h.tirada.nivel}`) : t("BR.Scene.NoRoll"), nota: h.nota }));
     ctx.canNew = gm;
     return ctx;
+  }
+
+  /** Qué clase de fondo es: la mesa vacía, el ambiente de una escena o un lugar (final). Cada uno se oscurece distinto en modo oscuro. */
+  #bgKind(state) {
+    if (state.fase === "muerte" || state.fase === "epilogo" || state.fase === "fin") return "place";
+    return state.escena ? "mood" : "table";
   }
 
   #background(state) {
@@ -411,6 +417,8 @@ export class ChozaPantalla extends ChozaApp {
   async _onRender(context, options) {
     await super._onRender(context, options);
     medirInterfaz(this.element);
+    // La escena de Foundry se ve detrás de los paneles; la mesa de madera es el respaldo (sin escena, o si se prefiere).
+    this.element.classList.toggle("br-fondo-madera", Boolean(get("mesaMadera")) || !escenaTieneFondo());
     aplicarOculta(this);
   }
 

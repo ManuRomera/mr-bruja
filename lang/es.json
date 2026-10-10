@@ -384,7 +384,9 @@
       "Forget": "Olvidar posiciones de ventanas",
       "Forgotten": "Posiciones de ventanas olvidadas.",
       "mesaVentana": "Mesa en ventana",
-      "mesaVentanaHint": "La Choza es una ventana que puedes mover y redimensionar, en vez de ocupar toda la pantalla."
+      "mesaVentanaHint": "La Choza es una ventana que puedes mover y redimensionar, en vez de ocupar toda la pantalla.",
+      "mesaMadera": "Fondo de madera",
+      "mesaMaderaHint": "A pantalla completa, la mesa tapa la escena de Foundry con una mesa de madera en vez de dejarla ver detrás."
     },
     "Diagnostic": {
       "Title": "Diagnóstico",

@@ -384,7 +384,9 @@
       "Forget": "Forget window positions",
       "Forgotten": "Window positions forgotten.",
       "mesaVentana": "Table in a window",
-      "mesaVentanaHint": "The Hut is a window you can move and resize, instead of filling the screen."
+      "mesaVentanaHint": "The Hut is a window you can move and resize, instead of filling the screen.",
+      "mesaMadera": "Wooden table background",
+      "mesaMaderaHint": "In full screen, the table covers Foundry's scene with a wooden table instead of letting it show through."
     },
     "Diagnostic": {
       "Title": "Diagnostic",

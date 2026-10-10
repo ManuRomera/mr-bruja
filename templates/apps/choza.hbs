@@ -4,7 +4,7 @@
   <p class="br-lede">{{#if gm}}{{localize "BR.Game.Preparing"}}{{else}}{{localize "BR.Game.WaitGM"}}{{/if}}</p>
 </div>
 {{else}}
-<div class="br-choza {{#if fs}}fs{{/if}} phase-{{fase}}" data-tipo="{{tipoEscena}}" style="--br-escena:{{colorEscena}}; --br-bg:{{bg}}">
+<div class="br-choza {{#if fs}}fs{{/if}} phase-{{fase}}" data-tipo="{{tipoEscena}}" data-bg="{{bgKind}}" style="--br-escena:{{colorEscena}}; --br-bg:{{bg}}">
   <div class="br-atmos" aria-hidden="true">{{#each motas}}<i style="--i:{{this}}"></i>{{/each}}</div>
 
   {{!-- Cabecera: el lomo del libro. Título, velas, frasco de PD y herramientas. --}}

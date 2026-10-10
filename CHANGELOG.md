@@ -1,5 +1,11 @@
 # Cambios
 
+## 0.3.1 · 2026-10-10
+
+- **La mesa a pantalla completa se integra con el fondo**: la capa es transparente y se ve la escena de Foundry detrás de los paneles (antes era una mesa opaca que la tapaba, y en modo oscuro quedaba casi negra). Un velo asienta el conjunto, claro u oscuro. La mesa de madera queda como respaldo cuando la escena no tiene imagen y como opción: Accesibilidad → «Fondo de madera».
+- La escena de bienvenida **cubre toda la pantalla** sin bandas: se aplica al arrancar, tras cada reencuadre de Foundry y cuando el ratón mueve o amplía el lienzo por debajo de la mesa.
+- En modo oscuro, los fondos de la ventana ya no se apagan hasta el negro (se oscurecen según sean mesa, ambiente de escena o lugar).
+
 ## 0.3.0 · 2026-10-10
 
 - **Mesa a pantalla completa**: la Choza puede ocupar toda la pantalla, por encima del lienzo y por debajo de los controles de Foundry y de las ventanas. Mide la barra lateral y las macros, deja pasar el ratón fuera de sus paneles, se oculta con el ojo y se recupera con una pastilla fija o con la herramienta de la escena.

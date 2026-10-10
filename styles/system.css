@@ -418,6 +418,18 @@
   .br-choza-fs .br-board.with-sides { grid-template-columns: 206px minmax(0, 1fr) 228px; gap: .8rem; }
   .br-choza-fs .br-hud { gap: 1rem; } .br-choza-fs .br-hud-title h1 { font-size: 1.5em; }
 }
+
+/* Integrada con el fondo: a pantalla completa la capa es transparente y se ve la escena de Foundry detrás.
+   Un velo la asienta (claro u oscuro) y deja respirar los paneles. La mesa de madera solo sale si no hay escena
+   con imagen o si se prefiere (Accesibilidad → «Fondo de madera»). */
+.br-choza-fs:not(.br-fondo-madera) .br-choza { background: transparent; }
+.br-choza-fs:not(.br-fondo-madera) .br-choza::before { background: none; }
+.br-choza-fs:not(.br-fondo-madera) .br-choza::after {
+  background: radial-gradient(ellipse at 50% 45%, rgba(8, 14, 14, .05) 35%, rgba(4, 9, 9, .55) 100%), rgba(10, 14, 14, .16);
+}
+.br-dark .br-choza-fs:not(.br-fondo-madera) .br-choza::after {
+  background: radial-gradient(ellipse at 50% 45%, rgba(3, 7, 7, .38) 30%, rgba(2, 5, 5, .8) 100%), rgba(4, 9, 9, .52);
+}
 /* Pastilla para recuperar la mesa cuando está oculta */
 .br-pastilla { position: fixed; left: 50%; transform: translateX(-50%); z-index: 21; display: inline-flex; align-items: center; gap: .6em; padding: .5em 1.3em; border-radius: 999px; cursor: pointer;
   font-family: var(--br-serif); font-size: 15px; color: #1b1612; background: var(--br-oro); border: 2px solid var(--br-oro-2); box-shadow: 0 6px 18px rgba(0, 0, 0, .6); }
@@ -591,7 +603,9 @@
 .br-dark .mr-br .br-total { color: #e07a8a; } .br-dark .mr-br .br-result.nivel-granExito .br-total, .br-dark .mr-br .br-result.nivel-abrumador .br-total { color: #8fd09b; } .br-dark .mr-br .br-result.nivel-parcial .br-total { color: #e8c05a; }
 .br-dark .mr-br .br-gains .pd { color: #8fd09b; } .br-dark .mr-br .br-gains .cons { color: #e07a8a; }
 .br-dark .mr-br .br-dice-count, .br-dark .mr-br .br-use-line.granted i { color: #8fd09b; }
-.br-dark .mr-br .br-choza::before { filter: brightness(.34) saturate(.8); }
+.br-dark .mr-br .br-choza::before { filter: brightness(.6) saturate(.9); }
+.br-dark .mr-br .br-choza[data-bg=mood]::before { filter: brightness(.42) saturate(.8); }
+.br-dark .mr-br .br-choza[data-bg=table]::before { filter: brightness(.85) saturate(.95); }
 .br-dark .mr-br .br-panel { background: rgba(6, 16, 20, .92); }
 .br-dark .mr-br .br-card-art img { opacity: .8; }
 .br-dark .mr-br .br-hand, .br-dark .mr-br .br-final-text { color: #e6dcc3; }
