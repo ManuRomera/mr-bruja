@@ -22,6 +22,9 @@ jobs:
       - run: npm test
       - run: npm run check
       - run: npm run build
+      - name: El zip lleva lo importante (tours, fuentes, arte)
+        run: |
+          for f in tours/empezar.json fonts/imfe-gprm.otf assets/art/brand/cover.webp lang/es.json; do unzip -l dist/mr-bruja.zip | grep -q "$f" || { echo "Falta $f en el zip"; exit 1; }; done
       - name: Crear la release
         uses: softprops/action-gh-release@v2
         with:

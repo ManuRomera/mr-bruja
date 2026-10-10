@@ -382,7 +382,9 @@
       },
       "Reset": "Reset",
       "Forget": "Forget window positions",
-      "Forgotten": "Window positions forgotten."
+      "Forgotten": "Window positions forgotten.",
+      "mesaVentana": "Table in a window",
+      "mesaVentanaHint": "The Hut is a window you can move and resize, instead of filling the screen."
     },
     "Diagnostic": {
       "Title": "Diagnostic",
@@ -428,6 +430,150 @@
       "BookHow": "The book's PDF is made of images, so it is read with OCR on your computer (it never leaves it). Run this in the system folder and press “Reload”:",
       "Reload": "Reload",
       "Page": "Page {n}"
+    },
+    "Fs": {
+      "Show": "Show the table",
+      "Hide": "Hide the table and see the scene",
+      "ToWindow": "Table in a window",
+      "ToFull": "Full-screen table"
+    },
+    "Tour": {
+      "empezar": {
+        "Title": "First steps",
+        "Description": "How to set up the game: seats, witch and bag. About three minutes.",
+        "bienvenida": {
+          "Title": "A witch, an heir",
+          "Text": "Welcome to <b>Bruja</b>. An old witch is leaving the world and needs someone to take over her hut.\nTwo people play: <b>the Witch</b> and <b>the Game Director</b>, who plays everyone else.\nThis system handles the dice, the candles and the grimoire; the game's rulebook is still essential. Move forward and back with the buttons below and leave whenever you like."
+        },
+        "choza": {
+          "Title": "The Hut",
+          "Text": "This is <b>the Hut</b>, your table. It can be a window or fill the whole screen: the arrows button, top right, switches between them.\nThe whole game state is here and both of you see it at once."
+        },
+        "asientos": {
+          "Title": "The two seats",
+          "Text": "Both of you sit down: one as <b>the Witch</b> and one as <b>the Director</b>. If you play <b>solo</b>, take both.\nEach person sees and does their own part: the Director's secret notebook only opens in their browser."
+        },
+        "bruja": {
+          "Title": "Name and trait",
+          "Text": "The Witch needs a <b>name</b> (maybe a nickname) and a <b>trait</b>: what defines her, her looks, her temper or what she can do.\nThe italic buttons are ideas from the setting: press one to fill the field and change it as you like."
+        },
+        "bolsa": {
+          "Title": "The bag with three objects",
+          "Text": "Her <b>bag</b> holds three objects: one to find her way, one to trade and one to eat.\nNo compass, money or food: let your imagination run. Later these objects can help her on a roll."
+        },
+        "ambientacion": {
+          "Title": "The setting",
+          "Text": "Here is the <b>setting</b>: places, characters and dangers to inspire you. Follow it, ignore it or add your own with other modules."
+        },
+        "empezar": {
+          "Title": "Out of the hut",
+          "Text": "When you are both seated and the witch has a name, a trait and three objects, press <b>Set out to find an heir</b>.\nUnder “Game options” you can start with drama points or turn on the “last breath”."
+        },
+        "siguiente": {
+          "Title": "Now, let's play",
+          "Text": "Once the game starts, open the next tutorial, <b>The table in play</b>: it shows the cards, the cauldron, the candles and the drama points.\nYou'll find it under <b>Settings → Guided tutorial</b>."
+        }
+      },
+      "mesa": {
+        "Title": "The table in play",
+        "Description": "Cards, cauldron, candles, drama points and heirs. About four minutes.",
+        "intro": {
+          "Title": "One scene after another",
+          "Text": "The game is about <b>scenes</b>: the Witch picks a type, you play as long as needed and, if there is conflict, you roll.\nRolling closes the scene. Successes give <b>drama points</b> and failures give <b>consequences</b>. With five consequences the witch dies without an heir; if she gets an heir, she wins.\n(If you haven't started the game yet, some elements will appear later: this tour is still valid.)"
+        },
+        "cartas": {
+          "Title": "The five scene cards",
+          "Text": "<b>Action, Reaction, Drama, Monologue and Retrospection</b>. The Witch picks one and the <b>pawn</b> goes on it.\nShe can't repeat the previous type (it's greyed out) unless she <b>rests</b> (2 DP). The cards button, above, switches between engraved and neutral cards."
+        },
+        "libro": {
+          "Title": "The scene is an open book",
+          "Text": "On the left you <b>frame</b> it: who is there? where? what is happening? In a few words, between the two of you.\nNarrate as needed; you only roll when there is conflict."
+        },
+        "uso": {
+          "Title": "Trait or object in play",
+          "Text": "If the <b>trait</b> or a <b>bag object</b> helps, the Witch proposes it in a sentence and the Director decides whether to grant it. If granted, a third die is rolled."
+        },
+        "caldero": {
+          "Title": "The cauldron",
+          "Text": "The dice fall into the <b>cauldron</b>: 2d6 (3 with a trait, an object or a rest). The result shows its name and effect: drama points, consequences or both."
+        },
+        "cierre": {
+          "Title": "Closing the scene",
+          "Text": "Rolling <b>closes the scene</b>: write how it ends in a sentence or two, and everything goes into the Grimoire."
+        },
+        "velas": {
+          "Title": "The five candles",
+          "Text": "Each <b>consequence</b> snuffs a candle. The Director writes them in secret: you only see how many are still lit."
+        },
+        "frasco": {
+          "Title": "The drama points flask",
+          "Text": "<b>Drama points</b> fill the flask. The bar below advances toward the 9 you need, over the whole game, to be able to win."
+        },
+        "recetas": {
+          "Title": "The recipes",
+          "Text": "Points buy the <b>recipes</b>: one more die, a fairy's visit, <b>marking</b> an heir (4) and <b>choosing</b> her (5), which leads to the epilogue with no dice."
+        },
+        "herederas": {
+          "Title": "The heirs",
+          "Text": "The <b>heirs</b> you mark appear here with their wax seal. Up to six fit; only one is chosen."
+        },
+        "herramientas": {
+          "Title": "The tools",
+          "Text": "Left to right: <b>full screen or window</b>, hide the table (in full screen), engraved or neutral cards, the Director's notebook, the <b>Grimoire</b> (the story played), <b>Rules</b>, <b>Safety</b> (pause, veil and X-card) and <b>Accessibility</b>, with dark mode."
+        },
+        "fin": {
+          "Title": "Good luck",
+          "Text": "That's it. If you are the Director, the next tutorial shows your secret notebook.\nUnder Settings → Guided tutorial you can repeat any of them."
+        }
+      },
+      "director": {
+        "Title": "The Director and the notebook",
+        "Description": "Granting traits, writing consequences in secret and the notebook key. About three minutes.",
+        "intro": {
+          "Title": "The Game Director",
+          "Text": "You play everyone else —villagers, fairies, wolves— and keep what the Witch doesn't know: the <b>consequences</b>.\nThis tour is for whoever holds the Director's seat."
+        },
+        "conceder": {
+          "Title": "Granting the trait or object",
+          "Text": "When the Witch proposes using her trait or an object, you decide here: <b>Grant</b> or <b>Deny</b>. Be as lax as you like; the game rewards imagination."
+        },
+        "anotar": {
+          "Title": "Writing the consequence",
+          "Text": "When a roll gives consequences this notice appears: <b>write it in secret</b>, with a sentence you can use later. The sparks give ideas, but never write for you.\nIf the Witch spends points on a fairy or an heir, it will ask you here <b>which consequence goes away</b>."
+        },
+        "boton": {
+          "Title": "Your notebook",
+          "Text": "This button opens your <b>Director's Notebook</b>, the yellow page. Only you see it: the Witch knows how many consequences she carries, not which."
+        },
+        "lista": {
+          "Title": "The consequences",
+          "Text": "All of them are here, with their text. You can edit them, <b>remove</b> them when they get resolved in the story or <b>reveal</b> them: their text becomes public and goes into the Grimoire."
+        },
+        "clave": {
+          "Title": "The notebook key",
+          "Text": "The notebook is stored <b>encrypted</b>: not even the console lets the Witch read it. The key lives only in this browser.\n<b>Copy</b> it with the key button and keep it: without it you can't open the notebook from another browser or computer."
+        },
+        "candidatas": {
+          "Title": "Candidates and NPCs",
+          "Text": "Note your <b>heir candidates</b> and other NPCs here. Marking one costs the Witch 4 drama points; until then it's up to you."
+        },
+        "fin": {
+          "Title": "That's all",
+          "Text": "Remember: your secret notes never leave your notebook unless you reveal them.\nGood luck with the witch."
+        }
+      }
+    },
+    "Tutorial": {
+      "Title": "Guided tutorial",
+      "Open": "Start",
+      "Hint": "Step-by-step tours of the Hut: first steps, the table in play and the Director.",
+      "OfferTitle": "Shall I show you how to play?",
+      "OfferText": "There is a guided tutorial of a few minutes. You can repeat it any time from Settings → Guided tutorial.",
+      "OfferYes": "Start the tutorial",
+      "OfferNo": "Not now",
+      "Menu": "Choose a tour",
+      "MenuHint": "It opens with the Hut visible.",
+      "Button": "Tutorial"
     }
   }
 }

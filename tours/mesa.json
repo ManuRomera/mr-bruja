@@ -1,0 +1,91 @@
+{
+  "title": "BR.Tour.mesa.Title",
+  "description": "BR.Tour.mesa.Description",
+  "display": true,
+  "canBeResumed": true,
+  "suggestedNextTours": [
+    "mr-bruja.director"
+  ],
+  "steps": [
+    {
+      "id": "intro",
+      "title": "BR.Tour.mesa.intro.Title",
+      "content": "BR.Tour.mesa.intro.Text"
+    },
+    {
+      "id": "cartas",
+      "title": "BR.Tour.mesa.cartas.Title",
+      "content": "BR.Tour.mesa.cartas.Text",
+      "selector": "#br-choza .br-card-row",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "libro",
+      "title": "BR.Tour.mesa.libro.Title",
+      "content": "BR.Tour.mesa.libro.Text",
+      "selector": "#br-choza .br-scene-book .br-leaf",
+      "tooltipDirection": "RIGHT"
+    },
+    {
+      "id": "uso",
+      "title": "BR.Tour.mesa.uso.Title",
+      "content": "BR.Tour.mesa.uso.Text",
+      "selector": "#br-choza .br-use",
+      "tooltipDirection": "RIGHT"
+    },
+    {
+      "id": "caldero",
+      "title": "BR.Tour.mesa.caldero.Title",
+      "content": "BR.Tour.mesa.caldero.Text",
+      "selector": "#br-choza .br-cauldron-box",
+      "tooltipDirection": "LEFT"
+    },
+    {
+      "id": "cierre",
+      "title": "BR.Tour.mesa.cierre.Title",
+      "content": "BR.Tour.mesa.cierre.Text",
+      "selector": "#br-choza .br-close",
+      "tooltipDirection": "LEFT"
+    },
+    {
+      "id": "velas",
+      "title": "BR.Tour.mesa.velas.Title",
+      "content": "BR.Tour.mesa.velas.Text",
+      "selector": "#br-choza .br-hud-candles",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "frasco",
+      "title": "BR.Tour.mesa.frasco.Title",
+      "content": "BR.Tour.mesa.frasco.Text",
+      "selector": "#br-choza .br-hud-flask",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "recetas",
+      "title": "BR.Tour.mesa.recetas.Title",
+      "content": "BR.Tour.mesa.recetas.Text",
+      "selector": "#br-choza .br-recipes-sheet",
+      "tooltipDirection": "LEFT"
+    },
+    {
+      "id": "herederas",
+      "title": "BR.Tour.mesa.herederas.Title",
+      "content": "BR.Tour.mesa.herederas.Text",
+      "selector": "#br-choza .br-heirs-sheet",
+      "tooltipDirection": "LEFT"
+    },
+    {
+      "id": "herramientas",
+      "title": "BR.Tour.mesa.herramientas.Title",
+      "content": "BR.Tour.mesa.herramientas.Text",
+      "selector": "#br-choza .br-head-tools",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "fin",
+      "title": "BR.Tour.mesa.fin.Title",
+      "content": "BR.Tour.mesa.fin.Text"
+    }
+  ]
+}

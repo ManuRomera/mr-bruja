@@ -10,7 +10,7 @@ export class WelcomeApp extends SystemApp {
     id: "br-welcome", classes: ["br-welcome-app"],
     window: { title: "BR.Welcome.Title", icon: "fa-solid fa-hat-wizard", resizable: false },
     position: { width: 460, height: "auto" },
-    actions: { go: WelcomeApp.#go, hide: WelcomeApp.#hide }
+    actions: { go: WelcomeApp.#go, hide: WelcomeApp.#hide, tutorial: () => openApp("tutorial") }
   };
   static PARTS = { body: { template: `${TEMPLATES}/apps/welcome.hbs` } };
 

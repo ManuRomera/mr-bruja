@@ -382,7 +382,9 @@
       },
       "Reset": "Restablecer",
       "Forget": "Olvidar posiciones de ventanas",
-      "Forgotten": "Posiciones de ventanas olvidadas."
+      "Forgotten": "Posiciones de ventanas olvidadas.",
+      "mesaVentana": "Mesa en ventana",
+      "mesaVentanaHint": "La Choza es una ventana que puedes mover y redimensionar, en vez de ocupar toda la pantalla."
     },
     "Diagnostic": {
       "Title": "Diagnóstico",
@@ -428,6 +430,150 @@
       "BookHow": "El PDF del libro es de imágenes, así que se lee con OCR en tu ordenador (no sale de él). Ejecuta esto en la carpeta del sistema y pulsa «Volver a cargar»:",
       "Reload": "Volver a cargar",
       "Page": "Página {n}"
+    },
+    "Fs": {
+      "Show": "Mostrar la mesa",
+      "Hide": "Ocultar la mesa y ver la escena",
+      "ToWindow": "Mesa en ventana",
+      "ToFull": "Mesa a pantalla completa"
+    },
+    "Tour": {
+      "empezar": {
+        "Title": "Primeros pasos",
+        "Description": "Cómo preparar la partida: asientos, bruja y bolsa. Unos tres minutos.",
+        "bienvenida": {
+          "Title": "Una bruja, una heredera",
+          "Text": "Bienvenida a <b>Bruja</b>. Una vieja bruja se despide del mundo y necesita a alguien que se haga cargo de su choza.\nLa juegan dos personas: <b>la Bruja</b> y <b>el Director de juego</b>, que interpreta a todos los demás.\nEste sistema lleva los dados, las velas y el grimorio; el manual del juego sigue siendo imprescindible. Avanza y retrocede con los botones de abajo y sal cuando quieras."
+        },
+        "choza": {
+          "Title": "La Choza",
+          "Text": "Esta es <b>La Choza</b>, vuestra mesa. Puede ser una ventana o ocupar toda la pantalla: el botón de las flechas, arriba a la derecha, cambia de una a otra.\nTodo el estado de la partida está aquí y lo veis los dos a la vez."
+        },
+        "asientos": {
+          "Title": "Los dos asientos",
+          "Text": "Sentaos los dos: uno en <b>La Bruja</b> y otro en <b>El Director</b>. Si juegas <b>en solitario</b>, ocupa los dos.\nCada persona ve y hace lo suyo: la libreta secreta del Director solo se abre en su navegador."
+        },
+        "bruja": {
+          "Title": "Nombre y rasgo",
+          "Text": "La Bruja necesita un <b>nombre</b> (y quizá un apodo) y un <b>rasgo</b>: lo que la define, su aspecto, su carácter o lo que sabe hacer.\nLos botones en cursiva son ideas de la ambientación: púlsalos para rellenar el campo y cámbialo a tu gusto."
+        },
+        "bolsa": {
+          "Title": "La bolsa con tres objetos",
+          "Text": "Su <b>bolsa</b> lleva tres objetos: uno para orientarse, uno para intercambiar y uno para comer.\nNada de brújula, dinero ni comida: deja suelta la imaginación. Más adelante estos objetos pueden ayudarla en una tirada."
+        },
+        "ambientacion": {
+          "Title": "La ambientación",
+          "Text": "Aquí tienes la <b>ambientación</b>: lugares, personajes y peligros para inspirarte. Puedes seguirla, ignorarla o añadir las tuyas con otros módulos."
+        },
+        "empezar": {
+          "Title": "A salir de la choza",
+          "Text": "Cuando estéis los dos sentados y la bruja tenga nombre, rasgo y tres objetos, pulsa <b>Salir en busca de una heredera</b>.\nEn «Opciones de la partida» puedes dar puntos de drama de partida o activar el «último aliento»."
+        },
+        "siguiente": {
+          "Title": "Y ahora, a jugar",
+          "Text": "Cuando empiece la partida, abre el siguiente tutorial, <b>La mesa en juego</b>: te enseña las cartas, el caldero, las velas y los puntos de drama.\nLo encontrarás en <b>Configuración → Tutorial guiado</b>."
+        }
+      },
+      "mesa": {
+        "Title": "La mesa en juego",
+        "Description": "Cartas, caldero, velas, puntos de drama y herederas. Unos cuatro minutos.",
+        "intro": {
+          "Title": "Una escena detrás de otra",
+          "Text": "El juego va de <b>escenas</b>: la Bruja elige un tipo, jugáis lo que haga falta y, si hay conflicto, se tira.\nTirar cierra la escena. Los éxitos dan <b>puntos de drama</b> y los fracasos, <b>consecuencias</b>. Con cinco consecuencias, la bruja muere sin heredera; si logra una heredera, gana.\n(Si aún no habéis empezado la partida, algunos elementos saldrán más adelante: este recorrido seguirá siendo válido.)"
+        },
+        "cartas": {
+          "Title": "Las cinco cartas de escena",
+          "Text": "<b>Acción, Reacción, Drama, Monólogo y Retrospección</b>. La Bruja elige una y el <b>peón</b> se coloca sobre ella.\nNo puede repetir el tipo de la anterior (sale apagada) salvo que <b>descanse</b> (2 PD). El botón de las cartas, arriba, cambia entre grabados y cartas neutras."
+        },
+        "libro": {
+          "Title": "La escena es un libro abierto",
+          "Text": "A la izquierda se <b>plantea</b>: ¿quién está?, ¿dónde?, ¿qué pasa? En pocas palabras, entre los dos.\nNarrad lo que haga falta; solo cuando hay conflicto se tira."
+        },
+        "uso": {
+          "Title": "Rasgo u objeto en juego",
+          "Text": "Si el <b>rasgo</b> o un <b>objeto de la bolsa</b> ayudan, la Bruja lo propone con una frase y el Director decide si lo concede. Concedido, se tira un tercer dado."
+        },
+        "caldero": {
+          "Title": "El caldero",
+          "Text": "Los dados caen al <b>caldero</b>: 2d6 (3 si hay rasgo, objeto o descanso). El resultado sale con su nombre y su efecto: puntos de drama, consecuencias o ambos."
+        },
+        "cierre": {
+          "Title": "Cerrar la escena",
+          "Text": "Tirar <b>cierra la escena</b>: se escribe cómo termina, en una o dos frases, y todo queda en el Grimorio."
+        },
+        "velas": {
+          "Title": "Las cinco velas",
+          "Text": "Cada <b>consecuencia</b> apaga una vela. El Director las anota en secreto: tú solo ves cuántas quedan encendidas."
+        },
+        "frasco": {
+          "Title": "El frasco de puntos de drama",
+          "Text": "Los <b>puntos de drama</b> llenan el frasco. La barra de debajo avanza hacia los 9 que hacen falta, en toda la partida, para poder ganar."
+        },
+        "recetas": {
+          "Title": "Las recetas",
+          "Text": "Con puntos se compran las <b>recetas</b>: un dado más, la visita de un hada, <b>marcar</b> a una heredera (4) y <b>elegirla</b> (5), que lleva al epílogo sin dados."
+        },
+        "herederas": {
+          "Title": "Las herederas",
+          "Text": "Las <b>herederas</b> que marques aparecen aquí con su sello de cera. Caben hasta seis; solo una se elige."
+        },
+        "herramientas": {
+          "Title": "Las herramientas",
+          "Text": "De izquierda a derecha: <b>pantalla completa o ventana</b>, ocultar la mesa (a pantalla completa), cartas con grabado o neutras, la libreta del Director, el <b>Grimorio</b> (la historia jugada), <b>Reglas</b>, <b>Seguridad</b> (pausa, velo y tarjeta X) y <b>Accesibilidad</b>, con el modo oscuro."
+        },
+        "fin": {
+          "Title": "Buena suerte",
+          "Text": "Eso es todo. Si eres el Director, el siguiente tutorial te enseña tu libreta secreta.\nEn Configuración → Tutorial guiado puedes repetir cualquiera."
+        }
+      },
+      "director": {
+        "Title": "El Director y su libreta",
+        "Description": "Conceder rasgos, anotar consecuencias en secreto y la clave de la libreta. Unos tres minutos.",
+        "intro": {
+          "Title": "El Director de juego",
+          "Text": "Interpretas a todos los demás —aldeanos, hadas, lobos— y guardas lo que la Bruja no sabe: las <b>consecuencias</b>.\nEste recorrido es para quien ocupa el asiento del Director."
+        },
+        "conceder": {
+          "Title": "Conceder el rasgo o el objeto",
+          "Text": "Cuando la Bruja propone usar su rasgo o un objeto, aquí decides: <b>Conceder</b> o <b>Denegar</b>. Sé tan laxo como quieras; el juego premia la imaginación."
+        },
+        "anotar": {
+          "Title": "Anotar la consecuencia",
+          "Text": "Cuando una tirada da consecuencias aparece este aviso: <b>anótala en secreto</b>, con una frase que luego puedas usar. Las chispas dan ideas, pero nunca escriben por ti.\nSi la Bruja gasta puntos en un hada o en una heredera, te pedirá aquí <b>qué consecuencia desaparece</b>."
+        },
+        "boton": {
+          "Title": "Tu libreta",
+          "Text": "Este botón abre tu <b>Libreta del Director</b>, la página amarilla. Solo la ves tú: la Bruja sabe cuántas consecuencias lleva, no cuáles."
+        },
+        "lista": {
+          "Title": "Las consecuencias",
+          "Text": "Aquí están todas, con su texto. Puedes editarlas, <b>eliminarlas</b> cuando se resuelvan en la historia o <b>revelarlas</b>: su texto pasa a ser público y entra en el Grimorio."
+        },
+        "clave": {
+          "Title": "La clave de la libreta",
+          "Text": "La libreta se guarda <b>cifrada</b>: ni abriendo la consola puede leerla la Bruja. La clave vive solo en este navegador.\n<b>Cópiala</b> con la llave y guárdala: sin ella no podrás abrir la libreta desde otro navegador u ordenador."
+        },
+        "candidatas": {
+          "Title": "Candidatas y PNJ",
+          "Text": "Apunta aquí tus <b>candidatas a heredera</b> y los demás PNJ. Marcar una cuesta 4 puntos de drama a la Bruja; hasta entonces es cosa tuya."
+        },
+        "fin": {
+          "Title": "Eso es todo",
+          "Text": "Recuerda: tus notas secretas nunca salen de tu libreta, salvo que las reveles.\nSuerte con la bruja."
+        }
+      }
+    },
+    "Tutorial": {
+      "Title": "Tutorial guiado",
+      "Open": "Empezar",
+      "Hint": "Recorridos paso a paso por La Choza: primeros pasos, la mesa en juego y el Director.",
+      "OfferTitle": "¿Te enseño cómo se juega?",
+      "OfferText": "Hay un tutorial guiado de unos minutos. Puedes repetirlo cuando quieras desde Configuración → Tutorial guiado.",
+      "OfferYes": "Empezar el tutorial",
+      "OfferNo": "Ahora no",
+      "Menu": "Elige un recorrido",
+      "MenuHint": "Se abre con la Choza visible.",
+      "Button": "Tutorial"
     }
   }
 }

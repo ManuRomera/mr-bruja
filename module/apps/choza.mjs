@@ -9,6 +9,8 @@ import { rollDice } from "../services/dice.mjs";
 import { avisos, rolesDe, totales } from "../motor.mjs";
 import { activas, dadosDisponibles, escenaPermitida, pdDisponibles } from "../reglas.mjs";
 import { get, set } from "../settings.mjs";
+import { ofrecerTutorial } from "../tutorial.mjs";
+import { medirInterfaz, modoMesa, pastilla, vigilarInterfaz } from "../mesa-pantalla.mjs";
 
 const CATS = [
   { cat: "orientar", icon: "fa-compass", sprite: ASSETS.object["luna-creciente"] },
@@ -38,6 +40,7 @@ export class ChozaApp extends SystemApp {
       fairy: ChozaApp.#fairy, mark: ChozaApp.#mark, choose: ChozaApp.#choose,
       write: ChozaApp.#write, resolve: ChozaApp.#resolve, breathe: ChozaApp.#breathe, giveUp: ChozaApp.#giveUp,
       end: ChozaApp.#finish, revealAll: ChozaApp.#revealAll, newGame: ChozaApp.#newGame,
+      toggleFs: ChozaApp.#toggleFs, hide: ChozaApp.#hide,
       grimoire: () => openApp("grimoire"), rules: () => openApp("rules"), notebook: () => openApp("notebook"), safety: () => openApp("safety"), access: () => openApp("access")
     }
   };
@@ -51,9 +54,10 @@ export class ChozaApp extends SystemApp {
   /** Se llama una vez desde el arranque: repinta la Choza cuando cambia la partida o la libreta. */
   static init() {
     const same = doc => doc.id === GameService.doc()?.id;
-    for (const hook of ["updateJournalEntry", "createJournalEntry", "deleteJournalEntry"]) Hooks.on(hook, doc => { if (same(doc)) ChozaApp.instance?.refresh(); });
-    Hooks.on("mrBrSecret", () => ChozaApp.instance?.refresh());
-    Hooks.on("updateUser", () => ChozaApp.instance?.refresh());
+    for (const hook of ["updateJournalEntry", "createJournalEntry", "deleteJournalEntry"]) Hooks.on(hook, doc => { if (same(doc)) actualChoza()?.refresh(); });
+    Hooks.on("mrBrSecret", () => actualChoza()?.refresh());
+    Hooks.on("updateUser", () => actualChoza()?.refresh());
+    vigilarInterfaz(() => ChozaPantalla.instance?.element);
   }
 
   refresh() {
@@ -97,7 +101,7 @@ export class ChozaApp extends SystemApp {
     const fase = state.fase, tipoEscena = e?.tipo ?? "";
     const face = get("cardFace") === "neutral" ? "neutral" : "engraved";
     const ctx = {
-      gm, state, fase, roles, can, lang: game.i18n.lang, spectator: !roles.length && !gm,
+      gm, state, fase, roles, can, lang: game.i18n.lang, fs: Boolean(this.constructor.FULLSCREEN), spectator: !roles.length && !gm,
       isPrep: fase === "preparacion", isPlay: fase === "juego", isEnd: fase === "muerte" || fase === "epilogo" || fase === "fin",
       setting: { id: def.id, name: loc(def.name), tagline: loc(def.tagline) },
       faseLabel: e ? f("BR.Scene.Label", { n: e.n, tipo: t(`BR.Tipo.${e.tipo}`) }) : t(`BR.Fase.${fase}`),
@@ -256,6 +260,8 @@ export class ChozaApp extends SystemApp {
     }
   }
 
+  static FULLSCREEN = false;
+
   async close(options) { SoundService.silence(); return super.close(options); }
 
   /* ---------------------------------------- */
@@ -304,6 +310,13 @@ export class ChozaApp extends SystemApp {
     await GameService.dispatch({ type: "escena.elegir", tipo, descanso: rest, quien: mine.includes("bruja") ? "bruja" : "dj" });
   }
   static #toggleRest() { this.#rest = !this.#rest; this.render(); }
+  /** Cambia entre ventana y pantalla completa (elección explícita de esta persona). */
+  static async #toggleFs() {
+    await set("mesaModo", this.constructor.FULLSCREEN ? "ventana" : "pantalla");
+    await Choza.open();
+  }
+  static async #hide() { await set("mesaOculta", true); aplicarOculta(this); }
+
   static async #flip() { await set("cardFace", get("cardFace") === "neutral" ? "engraved" : "neutral"); this.render(); }
 
   static async #planteo() { await GameService.dispatch({ type: "escena.planteo", texto: val(this.element, "planteo") }); this.#draft.delete("planteo"); }
@@ -369,3 +382,62 @@ export class ChozaApp extends SystemApp {
     if (ok) await GameService.reset({ keepSeats: true });
   }
 }
+
+/* -------------------------------------------- */
+/*  Mesa a pantalla completa                    */
+/* -------------------------------------------- */
+
+/** Oculta o muestra la capa y la pastilla para recuperarla. */
+function aplicarOculta(app) {
+  const oculta = Boolean(get("mesaOculta"));
+  app.element?.classList.toggle("oculta", oculta);
+  pastilla({ visible: oculta, texto: t("BR.Fs.Show"), alPulsar: () => Choza.open() });
+}
+
+/**
+ * La Choza sin marco, a pantalla completa. Misma plantilla y misma lógica que la ventana; solo cambia el contenedor.
+ * Se inserta en `document.body` y deja pasar el ratón salvo sobre sus paneles (ver el CSS `.br-choza-fs`).
+ */
+export class ChozaPantalla extends ChozaApp {
+  static FULLSCREEN = true;
+  static NO_MEMORY = true;
+  static DEFAULT_OPTIONS = { id: "br-choza", classes: ["mr-br", "br-choza-fs"], tag: "div", window: { frame: false, resizable: false }, position: {} };
+
+  /** Sin ventana no hay posición: si no se anulan, Foundry le pone `left/top` en línea y la descoloca. */
+  setPosition() { return this.position; }
+  _updatePosition(position) { return position; }
+  bringToFront() {}
+
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    medirInterfaz(this.element);
+    aplicarOculta(this);
+  }
+
+  async close(options) { pastilla({ visible: false }); return super.close(options); }
+}
+
+/** La Choza que esté abierta ahora (ventana o pantalla completa). */
+export const actualChoza = () => [ChozaPantalla.instance, ChozaApp.instance].find(a => a?.rendered) ?? null;
+
+/**
+ * Punto de entrada de «La Choza»: elige ventana o pantalla completa según el ajuste y el espacio útil, cierra la otra
+ * y abre esta. Abrirla siempre la muestra (aunque estuviera oculta).
+ */
+export const Choza = {
+  async open(options = {}) {
+    const pantalla = modoMesa() === "pantalla";
+    const otra = pantalla ? ChozaApp.instance : ChozaPantalla.instance;
+    if (otra?.rendered) await otra.close();
+    if (pantalla && get("mesaOculta")) await set("mesaOculta", false);
+    const app = await (pantalla ? ChozaPantalla : ChozaApp).open(options);
+    setTimeout(() => ofrecerTutorial().catch(() => {}), 1500);
+    return app;
+  },
+  /** Oculta o muestra la mesa a pantalla completa (herramienta de la escena). */
+  async alternar() {
+    const p = ChozaPantalla.instance;
+    if (p?.rendered && !get("mesaOculta")) { await set("mesaOculta", true); return aplicarOculta(p); }
+    return Choza.open();
+  }
+};

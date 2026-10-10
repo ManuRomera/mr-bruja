@@ -1,0 +1,63 @@
+{
+  "title": "BR.Tour.empezar.Title",
+  "description": "BR.Tour.empezar.Description",
+  "display": true,
+  "canBeResumed": true,
+  "suggestedNextTours": [
+    "mr-bruja.mesa"
+  ],
+  "steps": [
+    {
+      "id": "bienvenida",
+      "title": "BR.Tour.empezar.bienvenida.Title",
+      "content": "BR.Tour.empezar.bienvenida.Text"
+    },
+    {
+      "id": "choza",
+      "title": "BR.Tour.empezar.choza.Title",
+      "content": "BR.Tour.empezar.choza.Text",
+      "selector": "#br-choza .br-hud",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "asientos",
+      "title": "BR.Tour.empezar.asientos.Title",
+      "content": "BR.Tour.empezar.asientos.Text",
+      "selector": "#br-choza .br-seats",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "bruja",
+      "title": "BR.Tour.empezar.bruja.Title",
+      "content": "BR.Tour.empezar.bruja.Text",
+      "selector": "#br-choza .br-prep .br-book .br-leaf",
+      "tooltipDirection": "RIGHT"
+    },
+    {
+      "id": "bolsa",
+      "title": "BR.Tour.empezar.bolsa.Title",
+      "content": "BR.Tour.empezar.bolsa.Text",
+      "selector": "#br-choza .br-bag-field",
+      "tooltipDirection": "LEFT"
+    },
+    {
+      "id": "ambientacion",
+      "title": "BR.Tour.empezar.ambientacion.Title",
+      "content": "BR.Tour.empezar.ambientacion.Text",
+      "selector": "#br-choza .br-setting-strip",
+      "tooltipDirection": "UP"
+    },
+    {
+      "id": "empezar",
+      "title": "BR.Tour.empezar.empezar.Title",
+      "content": "BR.Tour.empezar.empezar.Text",
+      "selector": "#br-choza .br-start",
+      "tooltipDirection": "UP"
+    },
+    {
+      "id": "siguiente",
+      "title": "BR.Tour.empezar.siguiente.Title",
+      "content": "BR.Tour.empezar.siguiente.Text"
+    }
+  ]
+}

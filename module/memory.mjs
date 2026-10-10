@@ -59,12 +59,14 @@ export function WithMemory(Base) {
     static MEMORY_FIELDS = FIELDS;
     /** Límites opcionales de tamaño: { maxWidth, maxHeight, minWidth, minHeight }. */
     static SIZE_LIMITS = {};
+    /** Una ventana sin marco (la mesa a pantalla completa) no tiene posición que recordar. */
+    static NO_MEMORY = false;
 
     constructor(options = {}) {
       const C = new.target;
       const id = options.memory ?? options.document?.uuid ?? C.MEMORY ?? C.name;
-      const saved = readMemory(id);
-      const inherited = saved.position ? {} : numeric(readMemory(`class.${C.name}`).position, ["width", "height"]);
+      const saved = C.NO_MEMORY ? {} : readMemory(id);
+      const inherited = saved.position || C.NO_MEMORY ? {} : numeric(readMemory(`class.${C.name}`).position, ["width", "height"]);
       const initial = saved.position ? {} : C.initialPosition?.(viewport()) ?? {};
       const position = { ...C.DEFAULT_OPTIONS?.position, ...initial, ...options.position, ...inherited, ...numeric(saved.position, C.MEMORY_FIELDS) };
       super({ ...options, position: fitToViewport(position, viewport(), C.SIZE_LIMITS) });
@@ -87,12 +89,13 @@ export function WithMemory(Base) {
 
     _onPosition(position) {
       super._onPosition?.(position);
-      if (!this.rendered) return;
+      if (!this.rendered || this.constructor.NO_MEMORY) return;
       clearTimeout(this._mrMemory.timer);
       this._mrMemory.timer = setTimeout(() => this.#savePosition(), 200);
     }
 
     #savePosition() {
+      if (this.constructor.NO_MEMORY) return;
       const fields = this.minimized ? ["left", "top"] : this.constructor.MEMORY_FIELDS;
       const pos = numeric(this.position, fields);
       writeMemory(this._mrMemory.id, { position: { ...readMemory(this._mrMemory.id).position, ...pos } });
@@ -146,7 +149,7 @@ export function WithMemory(Base) {
     }
 
     async close(options) {
-      if (this.rendered) {
+      if (this.rendered && !this.constructor.NO_MEMORY) {
         const scroll = {};
         for (const selector of this.constructor.SCROLL_MEMORY ?? []) {
           const el = this.element.querySelector(selector);

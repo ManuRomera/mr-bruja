@@ -4,7 +4,7 @@ import { ACCESS_DEFAULTS, INKS, get, set } from "../settings.mjs";
 import { SoundService } from "../services/sound.mjs";
 import { SystemApp, t } from "./base.mjs";
 
-const TOGGLES = ["darkMode", "readingMode", "highContrast", "plainFont", "wideSpacing", "largeButtons", "reducedMotion", "reducedEffects", "soundFx", "music"];
+const TOGGLES = ["darkMode", "mesaVentana", "readingMode", "highContrast", "plainFont", "wideSpacing", "largeButtons", "reducedMotion", "reducedEffects", "soundFx", "music"];
 const RANGES = { textScale: [85, 160, 5], sfxVolume: [0, 100, 5], ambientVolume: [0, 100, 5], musicVolume: [0, 100, 5] };
 
 /** Accesibilidad y lectura, por usuario. Cada cambio se aplica al instante. */
@@ -21,7 +21,7 @@ export class AccessPanel extends SystemApp {
 
   async _prepareContext() {
     return {
-      toggles: TOGGLES.map(key => ({ key, on: get(key), label: t(`BR.Access.${key}`), hint: t(`BR.Access.${key}Hint`) })),
+      toggles: TOGGLES.map(key => ({ key, on: key === "mesaVentana" ? get("mesaModo") === "ventana" : get(key), label: t(`BR.Access.${key}`), hint: t(`BR.Access.${key}Hint`) })),
       ranges: Object.entries(RANGES).map(([key, [min, max, step]]) => ({ key, min, max, step, value: Math.round(get(key) * 100), label: t(`BR.Access.${key}`) })),
       inks: Object.entries(INKS).map(([key, color]) => ({ key, color, selected: get("readingInk") === key, label: t(`BR.Access.Ink.${key}`) }))
     };
@@ -40,6 +40,12 @@ export class AccessPanel extends SystemApp {
   }
 
   static async #toggle(event, target) {
+    // «Mesa en ventana» no es un interruptor propio: elige entre ventana y el modo automático.
+    if (target.dataset.key === "mesaVentana") {
+      await set("mesaModo", get("mesaModo") === "ventana" ? "auto" : "ventana");
+      this.render();
+      return;
+    }
     await set(target.dataset.key, !get(target.dataset.key));
     if (target.dataset.key === "soundFx") SoundService.refresh();
     this.render();

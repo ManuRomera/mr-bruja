@@ -4,7 +4,7 @@
   <p class="br-lede">{{#if gm}}{{localize "BR.Game.Preparing"}}{{else}}{{localize "BR.Game.WaitGM"}}{{/if}}</p>
 </div>
 {{else}}
-<div class="br-choza phase-{{fase}}" data-tipo="{{tipoEscena}}" style="--br-escena:{{colorEscena}}; --br-bg:{{bg}}">
+<div class="br-choza {{#if fs}}fs{{/if}} phase-{{fase}}" data-tipo="{{tipoEscena}}" style="--br-escena:{{colorEscena}}; --br-bg:{{bg}}">
   <div class="br-atmos" aria-hidden="true">{{#each motas}}<i style="--i:{{this}}"></i>{{/each}}</div>
 
   {{!-- Cabecera: el lomo del libro. Título, velas, frasco de PD y herramientas. --}}
@@ -33,6 +33,8 @@
 
     {{#if spectator}}<span class="br-badge"><i class="fa-solid fa-eye" aria-hidden="true"></i> {{localize "BR.Table.Spectator"}}</span>{{/if}}
     <nav class="br-head-tools" aria-label="{{localize 'BR.Table.Tools'}}">
+      <button type="button" data-action="toggleFs" data-tooltip="{{#if fs}}{{localize 'BR.Fs.ToWindow'}}{{else}}{{localize 'BR.Fs.ToFull'}}{{/if}}" aria-label="{{#if fs}}{{localize 'BR.Fs.ToWindow'}}{{else}}{{localize 'BR.Fs.ToFull'}}{{/if}}"><i class="fa-solid {{#if fs}}fa-compress{{else}}fa-expand{{/if}}" aria-hidden="true"></i></button>
+      {{#if fs}}<button type="button" data-action="hide" data-tooltip="{{localize 'BR.Fs.Hide'}}" aria-label="{{localize 'BR.Fs.Hide'}}"><i class="fa-solid fa-eye-slash" aria-hidden="true"></i></button>{{/if}}
       <button type="button" data-action="flip" data-tooltip="{{faceLabel}}" aria-label="{{faceLabel}}"><i class="fa-solid fa-clone" aria-hidden="true"></i></button>
       {{#if can.dj}}<button type="button" data-action="notebook" data-tooltip="{{localize 'BR.App.Notebook'}}" aria-label="{{localize 'BR.App.Notebook'}}"><i class="fa-solid fa-book" aria-hidden="true"></i></button>{{/if}}
       <button type="button" data-action="grimoire" data-tooltip="{{localize 'BR.App.Grimoire'}}" aria-label="{{localize 'BR.App.Grimoire'}}"><i class="fa-solid fa-book-open" aria-hidden="true"></i></button>

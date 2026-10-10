@@ -1,5 +1,15 @@
 # Cambios
 
+## 0.3.0 · 2026-10-10
+
+- **Mesa a pantalla completa**: la Choza puede ocupar toda la pantalla, por encima del lienzo y por debajo de los controles de Foundry y de las ventanas. Mide la barra lateral y las macros, deja pasar el ratón fuera de sus paneles, se oculta con el ojo y se recupera con una pastilla fija o con la herramienta de la escena.
+  - Modo **automático**: pantalla completa si el espacio útil (sin controles ni barra lateral) supera el de la ventana; si no, ventana. Se puede forzar desde el botón de la cabecera o desde Accesibilidad → «Mesa en ventana».
+  - Diseño adaptable (consultas de contenedor): columnas y letra crecen en pantallas grandes.
+  - La escena de bienvenida cubre la pantalla sin bandas cuando la mesa está oculta.
+- **Tutorial guiado** con los tours de Foundry: «Primeros pasos», «La mesa en juego» y «El Director y su libreta» (28 pasos, español e inglés). Se ofrece una vez al abrir la Choza y vive en Configuración → Tutorial guiado y en la bienvenida. Un paso cuyo elemento no existe sale centrado.
+- Avisos de la mesa legibles sobre los fondos claros.
+- Empaquetado: `tours/` va en el zip y CI comprueba que lleva tours, fuentes y arte.
+
 ## 0.2.1 · 2026-10-09
 
 - Carátula (`docs/img/cover.png`), capturas, página de GitHub Pages y README con portada.

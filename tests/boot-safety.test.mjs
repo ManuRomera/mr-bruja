@@ -54,7 +54,8 @@ test("ninguna ventana nace más grande que 1400×900", () => {
       if (m[1] !== '"auto"') assert.ok(Number(m[1]) <= 1400, `${file}: ancho ${m[1]}`);
       if (m[2] !== '"auto"') assert.ok(Number(m[2]) <= 900, `${file}: alto ${m[2]}`);
     }
-    assert.doesNotMatch(read(file), /frame:\s*false/, `${file}: ventana sin marco (no se podría cerrar)`);
+    // Una ventana sin marco no se puede cerrar con su botón: solo se admite la mesa a pantalla completa, que se oculta y se recupera.
+    if (file !== "module/apps/choza.mjs") assert.doesNotMatch(read(file), /frame:\s*false/, `${file}: ventana sin marco (no se podría cerrar)`);
   }
   const welcome = read("module/apps/welcome.mjs").match(/width:\s*(\d+)/);
   assert.ok(Number(welcome[1]) <= 520, "el aviso de bienvenida debe ser pequeño");
@@ -108,7 +109,7 @@ test("sin reglas destructivas sobre la interfaz de Foundry", () => {
 });
 
 test("solo la señal de seguridad ocupa la pantalla entera, y se puede cerrar", () => {
-  const allowed = [".mr-br.br-safety-signal"];
+  const allowed = [".mr-br.br-safety-signal", ".br-choza-fs", ".br-pastilla"];
   const fixed = allRules.filter(r => /position:\s*fixed/.test(r.body)).map(r => r.selector);
   for (const s of fixed) assert.ok(allowed.some(a => s.startsWith(a)), `position: fixed en ${s}`);
   const safety = read("module/apps/safety.mjs");
@@ -140,4 +141,20 @@ test("nadie escribe en el Proxy position de ApplicationV2 (un 0 lanza TypeError)
   for (const file of code) {
     assert.doesNotMatch(read(file), /Object\.assign\(this\.position|this\.position\.\w+\s*=[^=]/, `${file} escribe en this.position`);
   }
+});
+
+test("la mesa a pantalla completa se puede ocultar y recuperar, y no bloquea el ratón", () => {
+  const choza = read("module/apps/choza.mjs"), css = read("styles/system.css"), mesa = read("module/mesa-pantalla.mjs");
+  assert.match(choza, /window: \{ frame: false/);
+  assert.match(choza, /static NO_MEMORY = true/);
+  assert.match(choza, /setPosition\(\) \{ return this\.position; \}/, "sin anular setPosition, Foundry la descoloca");
+  assert.match(choza, /set\("mesaOculta", true\)/);
+  assert.match(mesa, /id = "br-pastilla"/);
+  const fs = allRules.find(r => r.selector === ".br-choza-fs");
+  assert.match(fs.body, /pointer-events:\s*none/);
+  assert.match(fs.body, /z-index:\s*20\s*!important/);
+  assert.doesNotMatch(css, /\.br-choza-fs[^{]*\{[^}]*(backdrop-filter|transform)/, "rompe los position: fixed hijos");
+  const entry = read("mr-bruja.mjs");
+  const ready = entry.slice(entry.indexOf('Hooks.once("ready"'), entry.indexOf("async function ensureScene"));
+  assert.doesNotMatch(ready.replace(/openOnStart[^\n]*\n/, ""), /Choza\.open/, "la mesa no se abre sola");
 });

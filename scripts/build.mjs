@@ -9,7 +9,7 @@ import { spawnSync } from "node:child_process";
 const root = new URL("../", import.meta.url).pathname;
 const dist = join(root, "dist");
 const out = join(dist, "mr-bruja");
-const FILES = ["mr-bruja.mjs", "system.json", "LICENSE", "NOTICE.md", "README.md", "CHANGELOG.md", "module", "styles", "templates", "lang", "fonts", "assets"];
+const FILES = ["mr-bruja.mjs", "system.json", "LICENSE", "NOTICE.md", "README.md", "CHANGELOG.md", "module", "styles", "templates", "lang", "fonts", "tours", "assets"];
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(out, { recursive: true });

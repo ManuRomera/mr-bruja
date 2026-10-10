@@ -106,3 +106,56 @@ test("las fuentes del @font-face existen y llevan su licencia OFL", () => {
   for (const u of urls) assert.ok(existsSync(join(root, u)), u);
   assert.match(read("fonts/OFL.txt"), /SIL OPEN FONT LICENSE Version 1\.1/);
 });
+
+/* -------------------------------------------- */
+/*  Tutorial guiado                             */
+/* -------------------------------------------- */
+
+const TOUR_KEYS = ["empezar", "mesa", "director"];
+const lookup = (obj, path) => path.split(".").reduce((o, k) => o?.[k], obj);
+
+test("los tres tours existen, con ids únicos y textos en español e inglés", () => {
+  const es = JSON.parse(read("lang/es.json")), en = JSON.parse(read("lang/en.json"));
+  for (const key of TOUR_KEYS) {
+    const tour = JSON.parse(read(`tours/${key}.json`));
+    assert.ok(tour.steps.length >= 6, key);
+    const ids = tour.steps.map(s => s.id);
+    assert.equal(new Set(ids).size, ids.length, `${key}: ids repetidos`);
+    for (const k of [tour.title, tour.description, ...tour.steps.flatMap(s => [s.title, s.content])]) {
+      for (const [name, lang] of [["es", es], ["en", en]]) assert.ok(String(lookup(lang, k) ?? "").length > 3, `${key}: falta ${k} en ${name}`);
+    }
+    for (const next of tour.suggestedNextTours) assert.ok(TOUR_KEYS.includes(next.replace("mr-bruja.", "")), `${key}: siguiente desconocido ${next}`);
+  }
+});
+
+test("cada selector de un tour apunta a algo que existe en las plantillas o en el código", () => {
+  const source = [...walk("templates"), ...walk("module")].map(read).join("\n");
+  const missing = [];
+  for (const key of TOUR_KEYS) {
+    for (const step of JSON.parse(read(`tours/${key}.json`)).steps) {
+      if (!step.selector) continue;
+      for (const m of step.selector.matchAll(/\.(br-[a-z-]+)/g)) if (!source.includes(m[1])) missing.push(`${key}.${step.id}: clase ${m[1]}`);
+      for (const m of step.selector.matchAll(/#(br-[a-z-]+)/g)) if (!source.includes(`"${m[1]}"`)) missing.push(`${key}.${step.id}: id ${m[1]}`);
+      for (const m of step.selector.matchAll(/\[data-action=([A-Za-z]+)\]/g)) if (!source.includes(`data-action="${m[1]}"`)) missing.push(`${key}.${step.id}: acción ${m[1]}`);
+    }
+  }
+  assert.deepEqual(missing, []);
+});
+
+test("el tutorial se registra, se ofrece una sola vez y vive en Configuración", () => {
+  const tutorial = read("module/tutorial.mjs"), settings = read("module/settings.mjs"), entry = read("mr-bruja.mjs");
+  assert.match(tutorial, /game\.tours\.register\(SYSTEM_ID, clave/);
+  assert.match(tutorial, /get\(SYSTEM_ID, "tutorialOfrecido"\)/);
+  assert.match(settings, /registerMenu\(SYSTEM_ID, "tutorialMenu"/);
+  assert.match(settings, /"tutorialOfrecido", \{ scope: "client"/);
+  assert.match(entry, /registrarTutorial/);
+  assert.match(tutorial, /_preStep[\s\S]*paso\.selector = ""/, "un selector inexistente no debe romper el tour");
+  // Dialog: icono y etiqueta por separado
+  assert.doesNotMatch(tutorial, /label:\s*["`'][^"`']*<i /);
+});
+
+test("la release empaqueta tours/, fuentes y arte, y CI lo comprueba", () => {
+  assert.match(read("scripts/build.mjs"), /"tours"/);
+  assert.match(read("scripts/build.mjs"), /"fonts"/);
+  for (const wf of [".github/workflows/ci.yml", ".github/workflows/release.yml"]) assert.match(read(wf), /unzip -l dist\/mr-bruja\.zip/, wf);
+});

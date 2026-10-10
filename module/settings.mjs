@@ -24,6 +24,10 @@ export function registerSettings() {
   for (const [key, value] of Object.entries(ACCESS_DEFAULTS)) client(key, { type: typeof value === "boolean" ? Boolean : typeof value === "number" ? Number : String, default: value });
 
   client("cardFace", { type: String, default: "engraved" });
+  // Mesa a pantalla completa: modo (auto | pantalla | ventana) y si está oculta. Preferencias de este navegador.
+  client("mesaModo", { type: String, default: "auto" });
+  client("mesaOculta", { type: Boolean, default: false });
+  game.settings.register(SYSTEM_ID, "tutorialOfrecido", { scope: "client", config: false, type: Boolean, default: false });
   // Clave de la libreta secreta: solo en este navegador. Sin onChange: no es una preferencia visual.
   game.settings.register(SYSTEM_ID, "secretKey", { scope: "client", config: false, type: String, default: "" });
 
@@ -40,10 +44,14 @@ export function registerSettings() {
 const menuProxy = App => class extends App { render() { return App.open(); } };
 
 /** Menús en Configurar ajustes. Se registran aparte porque dependen de las clases de las apps. */
-export function registerMenus({ AccessPanel, DiagnosticApp }) {
+export function registerMenus({ AccessPanel, DiagnosticApp, TutorialLauncher }) {
   game.settings.registerMenu(SYSTEM_ID, "accessMenu", {
     name: "BR.Access.Title", label: "BR.Access.Open", hint: "BR.Access.Intro",
     icon: "fa-solid fa-universal-access", type: menuProxy(AccessPanel), restricted: false
+  });
+  game.settings.registerMenu(SYSTEM_ID, "tutorialMenu", {
+    name: "BR.Tutorial.Title", label: "BR.Tutorial.Open", hint: "BR.Tutorial.Hint",
+    icon: "fa-solid fa-graduation-cap", type: menuProxy(TutorialLauncher), restricted: false
   });
   game.settings.registerMenu(SYSTEM_ID, "diagnosticMenu", {
     name: "BR.Diagnostic.Title", label: "BR.Diagnostic.Open", hint: "BR.Diagnostic.Hint",

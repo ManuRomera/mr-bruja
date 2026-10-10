@@ -12,7 +12,9 @@ import { applyPreferences, registerMenus, registerSettings } from "./module/sett
 import { BOOT, bootPhase, diagnostic } from "./module/services/diagnostic.mjs";
 import { BrujaSheet } from "./module/sheets/bruja.mjs";
 import { Apps, openApp } from "./module/apps/registry.mjs";
-import { ChozaApp } from "./module/apps/choza.mjs";
+import { ChozaApp, Choza } from "./module/apps/choza.mjs";
+import { registrarCoberturaDeFondo } from "./module/mesa-pantalla.mjs";
+import { TutorialLauncher, empezarTutorial, registrarTutorial } from "./module/tutorial.mjs";
 import { LibretaApp } from "./module/apps/libreta.mjs";
 import { GrimorioApp } from "./module/apps/grimorio.mjs";
 import { ReglasApp } from "./module/apps/reglas.mjs";
@@ -39,7 +41,7 @@ Hooks.once("init", () => {
 
   bootPhase("settings", () => {
     registerSettings();
-    registerMenus({ AccessPanel, DiagnosticApp });
+    registerMenus({ AccessPanel, DiagnosticApp, TutorialLauncher });
   });
 
   bootPhase("sheets", () => {
@@ -52,7 +54,7 @@ Hooks.once("init", () => {
   });
 
   bootPhase("apps", () => {
-    Object.assign(Apps, { choza: ChozaApp, notebook: LibretaApp, grimoire: GrimorioApp, rules: ReglasApp, access: AccessPanel, safety: SafetyPanel, welcome: WelcomeApp, diagnostic: DiagnosticApp });
+    Object.assign(Apps, { tutorial: TutorialLauncher, choza: Choza, notebook: LibretaApp, grimoire: GrimorioApp, rules: ReglasApp, access: AccessPanel, safety: SafetyPanel, welcome: WelcomeApp, diagnostic: DiagnosticApp });
     game.keybindings.register(SYSTEM_ID, "openChoza", {
       name: "BR.Keys.Choza", hint: "BR.Keys.ChozaHint",
       editable: [{ key: "KeyB", modifiers: ["Alt"] }],
@@ -63,7 +65,7 @@ Hooks.once("init", () => {
   bootPhase("api", () => {
     game.mrBruja = Object.freeze({
       open: () => openApp("choza"), choza: () => openApp("choza"), notebook: () => openApp("notebook"), grimoire: () => openApp("grimoire"), rules: () => openApp("rules"),
-      safety: () => openApp("safety"), access: () => openApp("access"),
+      safety: () => openApp("safety"), access: () => openApp("access"), tutorial: clave => empezarTutorial(clave),
       state: () => GameService.state(), registerSetting, settings: () => GameService.settings().map(s => s.id),
       /** Informe copiable. `game.mrBruja.diagnostic({ show: true })` abre la ventana. */
       diagnostic: async ({ show = false } = {}) => {
@@ -86,6 +88,8 @@ Hooks.once("ready", async () => {
   bootPhase("sound", () => SoundService.init());
   bootPhase("safety", () => SafetyPanel.init());
   bootPhase("live", () => { ChozaApp.init(); LibretaApp.init(); GrimorioApp.init(); });
+  bootPhase("fondo", registrarCoberturaDeFondo);
+  await bootPhase("tutorial", registrarTutorial);
 
   if (game.user.isGM) {
     await bootPhase("game", () => GameService.ensure());
@@ -107,6 +111,7 @@ async function ensureScene() {
   const onlyCoreDefault = game.scenes.size === 1 && game.scenes.has("NUEDEFAULTSCENE0");
   if (game.scenes.size && !onlyCoreDefault) return game.settings.set(SYSTEM_ID, "sceneReady", true);
   const scene = await Scene.implementation.create(welcomeSceneData({ name: game.i18n.localize("BR.App.Choza"), src: ASSETS.place["bosque-noche"] }));
+  await scene?.setFlag(SYSTEM_ID, "fondo", true);
   if (scene && !scene.active) await scene.activate();
   await scene?.view();
   await game.settings.set(SYSTEM_ID, "sceneReady", true);
@@ -122,7 +127,7 @@ Hooks.on("getSceneControlButtons", controls => {
     addControlGroup(controls, {
       name: "br", title: "MR- Bruja", icon: "fa-solid fa-hat-wizard",
       tools: [
-        { name: "brChoza", title: t("BR.App.Choza"), icon: "fa-solid fa-hat-wizard", onChange: () => openApp("choza") },
+        { name: "brChoza", title: t("BR.App.Choza"), icon: "fa-solid fa-hat-wizard", onChange: () => Choza.alternar() },
         { name: "brNotebook", title: t("BR.App.Notebook"), icon: "fa-solid fa-book", onChange: () => openApp("notebook") },
         { name: "brGrimoire", title: t("BR.App.Grimoire"), icon: "fa-solid fa-book-open", onChange: () => openApp("grimoire") },
         { name: "brRules", title: t("BR.App.Rules"), icon: "fa-solid fa-circle-question", onChange: () => openApp("rules") },
@@ -164,7 +169,7 @@ Hooks.on("renderSettings", (app, html) => {
     const block = document.createElement("section");
     block.className = "br-settings-block";
     block.innerHTML = `<h4 class="divider">MR- Bruja</h4>`;
-    for (const [label, icon, name] of [["BR.App.Choza", "fa-hat-wizard", "choza"], ["BR.Access.Title", "fa-universal-access", "access"], ["BR.Diagnostic.Title", "fa-stethoscope", "diagnostic"]]) {
+    for (const [label, icon, name] of [["BR.App.Choza", "fa-hat-wizard", "choza"], ["BR.Access.Title", "fa-universal-access", "access"], ["BR.Tutorial.Title", "fa-graduation-cap", "tutorial"], ["BR.Diagnostic.Title", "fa-stethoscope", "diagnostic"]]) {
       const b = document.createElement("button");
       b.type = "button";
       b.innerHTML = `<i class="fa-solid ${icon}" aria-hidden="true"></i> ${foundry.utils.escapeHTML(game.i18n.localize(label))}`;

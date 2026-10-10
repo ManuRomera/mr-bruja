@@ -1,0 +1,61 @@
+{
+  "title": "BR.Tour.director.Title",
+  "description": "BR.Tour.director.Description",
+  "display": true,
+  "canBeResumed": true,
+  "suggestedNextTours": [],
+  "steps": [
+    {
+      "id": "intro",
+      "title": "BR.Tour.director.intro.Title",
+      "content": "BR.Tour.director.intro.Text"
+    },
+    {
+      "id": "conceder",
+      "title": "BR.Tour.director.conceder.Title",
+      "content": "BR.Tour.director.conceder.Text",
+      "selector": "#br-choza .br-use",
+      "tooltipDirection": "RIGHT"
+    },
+    {
+      "id": "anotar",
+      "title": "BR.Tour.director.anotar.Title",
+      "content": "BR.Tour.director.anotar.Text",
+      "selector": "#br-choza .br-secret-panel",
+      "tooltipDirection": "RIGHT"
+    },
+    {
+      "id": "boton",
+      "title": "BR.Tour.director.boton.Title",
+      "content": "BR.Tour.director.boton.Text",
+      "selector": "#br-choza .br-head-tools [data-action=notebook]",
+      "tooltipDirection": "DOWN"
+    },
+    {
+      "id": "lista",
+      "title": "BR.Tour.director.lista.Title",
+      "content": "BR.Tour.director.lista.Text",
+      "selector": "#br-notebook .br-cons-list",
+      "tooltipDirection": "LEFT"
+    },
+    {
+      "id": "clave",
+      "title": "BR.Tour.director.clave.Title",
+      "content": "BR.Tour.director.clave.Text",
+      "selector": "#br-notebook [data-action=copyKey]",
+      "tooltipDirection": "BOTTOM"
+    },
+    {
+      "id": "candidatas",
+      "title": "BR.Tour.director.candidatas.Title",
+      "content": "BR.Tour.director.candidatas.Text",
+      "selector": "#br-notebook [data-action=addRow][data-kind=candidatas]",
+      "tooltipDirection": "TOP"
+    },
+    {
+      "id": "fin",
+      "title": "BR.Tour.director.fin.Title",
+      "content": "BR.Tour.director.fin.Text"
+    }
+  ]
+}

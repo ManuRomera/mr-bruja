@@ -6,10 +6,12 @@
 
 Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición de El Refugio de Ryhope): un juego de narración compartida **para dos personas** sobre una vieja bruja que debe encontrar heredera antes de morir. **Necesitas el libro**; aquí no hay texto suyo (ver `NOTICE.md`).
 
-![La Choza con una escena en curso](docs/img/choza-escena.webp)
+![La Choza a pantalla completa](docs/img/pantalla-completa.webp)
 
 ## Qué hace
 
+- **Mesa a pantalla completa**: la Choza ocupa toda la pantalla bajo los controles de Foundry (o es una ventana, a tu gusto; en pantallas pequeñas elige sola la ventana). Se oculta con un clic y se recupera con una pastilla.
+- **Tutorial guiado** en tres recorridos (primeros pasos, la mesa en juego, el Director y su libreta), en español e inglés. Se ofrece la primera vez y vive en *Configuración → Tutorial guiado*.
 - **La Choza**: un caldero donde caen los dados, una bolsa con tres objetos, cinco velas que se apagan con cada consecuencia y un frasco que se llena de puntos de drama. La luz cambia de color con cada tipo de escena.
 - **Las cinco cartas de escena** (Acción, Reacción, Drama, Monólogo, Retrospección), con peón y la regla de no repetir tipo. Cartas con grabado o neutras.
 - **Consecuencias secretas de verdad**: el Director las anota en su **Libreta**, guardada **cifrada** (ChaCha20) en el mundo; la clave vive solo en el navegador del Director. Foundry envía todos los documentos a todos los clientes, así que un secreto «por permisos» se lee desde la consola: aquí, no. La Bruja solo ve cuántas velas quedan.
@@ -18,6 +20,8 @@ Sistema **no oficial** para Foundry VTT de ***Bruja***, de jim pinto (edición d
 - **Reglas** dentro del juego: un resumen propio y, si lo importas de tu PDF, el texto de tu manual (pestaña «El libro»).
 - **Una persona o dos**: una sola puede ocupar los dos asientos para jugar en solitario; dos personas se alternan.
 - **Cuidado**: modo oscuro, modo lectura, alto contraste, texto grande, botones grandes, movimiento reducido, volúmenes por usuario, líneas y velos, Tarjeta X anónima, ventanas que recuerdan su posición, español e inglés.
+
+![El tutorial guiado](docs/img/tutorial.webp)
 
 ![La Choza en modo oscuro](docs/img/modo-oscuro.webp)
 
@@ -39,6 +43,7 @@ python3 scripts/import-manual.py "/ruta/a/tu/PDF_Bruja.pdf"   # crea assets/manu
 npm test        # reglas, motor, estructura y seguridad de arranque
 npm run check   # sintaxis, JSON y rutas de arte
 npm run build   # dist/mr-bruja.zip
+python3 scripts/gen-tours.py   # regenera tours/*.json y sus textos en lang/ (única fuente de los tutoriales)
 python3 scripts/import-art.py <carpeta-del-zip-descomprimido>
 ```
 

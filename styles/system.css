@@ -114,7 +114,7 @@
 .mr-br label.br-check { flex-direction: row; align-items: center; gap: .5em; }
 .mr-br .br-lede { color: inherit; opacity: .8; font-style: italic; }
 .mr-br .br-hint { font-size: .9em; opacity: .75; }
-.mr-br .br-warn { display: flex; gap: .5em; align-items: center; padding: .5em .8em; background: rgba(201, 162, 74, .18); border-left: 3px solid var(--br-oro); font-size: .9em; }
+.mr-br .br-warn { display: flex; gap: .5em; align-items: center; padding: .5em .8em; background: rgba(8, 20, 24, .86); color: #f1e4bb; border-left: 3px solid var(--br-oro); border-radius: 0 4px 4px 0; font-size: .92em; box-shadow: 0 4px 12px rgba(0, 0, 0, .4); }
 .mr-br .br-row-end, .mr-br footer.br-row-end { display: flex; gap: .5em; justify-content: flex-end; flex-wrap: wrap; align-items: center; }
 .mr-br .br-badge { display: inline-flex; gap: .4em; align-items: center; font-size: .78em; letter-spacing: .06em; padding: .15em .6em; border: 1px solid currentColor; border-radius: 999px; opacity: .85; }
 .mr-br .br-chips { display: flex; flex-wrap: wrap; gap: .35em; }
@@ -387,6 +387,42 @@
   .mr-br .br-cauldron { width: 170px; height: 180px; }
 }
 
+
+
+/* --------------------------------------------------------------------------
+   La Choza a pantalla completa. La capa va por encima del lienzo (20) y por debajo de los controles de Foundry (30)
+   y de las ventanas (101). El contenedor deja pasar el ratón: solo los paneles lo reciben.
+   Las cuatro variables --br-izq/arriba/der/abajo las mide mesa-pantalla.mjs (barra lateral y macros).
+   NO poner backdrop-filter ni transform en un padre de algo position: fixed.
+   -------------------------------------------------------------------------- */
+.br-choza-fs { position: fixed; inset: 0; z-index: 20 !important; pointer-events: none; color: #efe6cf; font-family: var(--br-serif); font-size: calc(15.5px * var(--br-text-scale));
+  --br-izq: 108px; --br-arriba: 58px; --br-der: 340px; --br-abajo: 124px; }
+.br-choza-fs.oculta { display: none; }
+.br-choza-fs .br-choza { position: absolute; inset: 0; height: auto; padding: var(--br-arriba) var(--br-der) var(--br-abajo) var(--br-izq); pointer-events: none; container: br-fs / inline-size; }
+.br-choza-fs .br-hud, .br-choza-fs .br-left, .br-choza-fs .br-center, .br-choza-fs .br-right, .br-choza-fs .br-foot { pointer-events: auto; }
+.br-choza-fs .br-hud { border: 2px solid var(--br-oro); border-radius: 10px; overflow: hidden; margin-bottom: .6rem; }
+.br-choza-fs .br-foot { border: 2px solid rgba(201, 162, 74, .5); border-radius: 10px; margin-top: .4rem; }
+.br-choza-fs .br-board { padding: .4rem 0; }
+.br-choza-fs .br-board.with-sides { grid-template-columns: 236px minmax(0, 1fr) 262px; }
+@container br-fs (min-width: 1350px) {
+  .br-choza-fs .br-board.with-sides { grid-template-columns: 268px minmax(0, 1fr) 300px; gap: 1.2rem; }
+  .br-choza-fs .br-leaf { padding: .6rem 1.5rem 1.1rem; }
+}
+@container br-fs (min-width: 1650px) {
+  .br-choza-fs .br-board.with-sides { grid-template-columns: 300px minmax(0, 1fr) 340px; gap: 1.5rem; }
+  .br-choza-fs .br-board, .br-choza-fs .br-hud, .br-choza-fs .br-foot { font-size: 1.1em; }
+  .br-choza-fs .br-cauldron { width: 240px; height: 250px; }
+  .br-choza-fs .br-card-row:not(.compact) { max-width: 920px; margin-inline: auto; }
+}
+@container br-fs (max-width: 1100px) {
+  .br-choza-fs .br-board.with-sides { grid-template-columns: 206px minmax(0, 1fr) 228px; gap: .8rem; }
+  .br-choza-fs .br-hud { gap: 1rem; } .br-choza-fs .br-hud-title h1 { font-size: 1.5em; }
+}
+/* Pastilla para recuperar la mesa cuando está oculta */
+.br-pastilla { position: fixed; left: 50%; transform: translateX(-50%); z-index: 21; display: inline-flex; align-items: center; gap: .6em; padding: .5em 1.3em; border-radius: 999px; cursor: pointer;
+  font-family: var(--br-serif); font-size: 15px; color: #1b1612; background: var(--br-oro); border: 2px solid var(--br-oro-2); box-shadow: 0 6px 18px rgba(0, 0, 0, .6); }
+.br-pastilla:hover { background: var(--br-oro-2); }
+.br-reduced-motion .br-pastilla { transition: none; }
 
 /* Libreta del Director */
 .mr-br .br-notebook { padding: 1rem 1.2rem 1.4rem; display: flex; flex-direction: column; gap: 1rem; overflow-y: auto; color: var(--br-ink); height: 100%; }
