@@ -1,6 +1,6 @@
 # MR- Bruja
 
-![Foundry VTT 13–14](https://img.shields.io/badge/Foundry%20VTT-13%20%E2%80%93%2014-informational) ![Versión](https://img.shields.io/github/v/release/ManuRomera/mr-bruja) ![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green) ![No oficial](https://img.shields.io/badge/juego-no%20oficial-lightgrey)
+![Foundry VTT 13–14](https://img.shields.io/badge/Foundry%20VTT-13%20%E2%80%93%2014-informational) ![Versión](https://img.shields.io/github/v/release/ManuRomera/mr-bruja) ![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green) ![No oficial](https://img.shields.io/badge/juego-no%20oficial-lightgrey) [![Descargas](https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/badges/descargas-flat/mr-bruja.svg)](https://github.com/ManuRomera/mr-bruja/releases)
 
 ![MR- Bruja](docs/img/cover.png)
 
