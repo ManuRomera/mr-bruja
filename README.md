@@ -1,6 +1,13 @@
 # MR- Bruja
 
-![Foundry VTT 13–14](https://img.shields.io/badge/Foundry%20VTT-13%20%E2%80%93%2014-informational) ![Versión](https://img.shields.io/github/v/release/ManuRomera/mr-bruja) ![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green) ![No oficial](https://img.shields.io/badge/juego-no%20oficial-lightgrey) [![Descargas](https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/badges/descargas-flat/mr-bruja.svg)](https://github.com/ManuRomera/mr-bruja/releases)
+<p align="center">
+  <a href="https://github.com/ManuRomera"><img alt="Manu Romera · Digital RPG Design" src="https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/badges/mr-firma.svg" height="28"></a>
+  <a href="https://github.com/ManuRomera/mr-bruja/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/ManuRomera/mr-bruja?include_prereleases&style=for-the-badge&color=6b3fa0&label=release"></a>
+  <a href="https://foundryvtt.com"><img alt="Foundry VTT V13 – V14" src="https://img.shields.io/badge/Foundry%20VTT-V13%20%E2%80%93%20V14-57d8c8?style=for-the-badge"></a>
+  <a href="https://github.com/ManuRomera/mr-bruja/releases"><img alt="Downloads" src="https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/badges/descargas/mr-bruja.svg"></a>
+  <img alt="Juego no oficial" src="https://img.shields.io/badge/juego-no%20oficial-2b3245?style=for-the-badge">
+  <a href="LICENSE"><img alt="Código MIT" src="https://img.shields.io/badge/c%C3%B3digo-MIT-2b3245?style=for-the-badge"></a>
+</p>
 
 ![MR- Bruja](docs/img/cover.png)
 
